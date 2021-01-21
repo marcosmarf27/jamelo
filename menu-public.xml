@@ -1,0 +1,48 @@
+<menu>
+    <menuitem label='Cardápio online'>
+    <icon>fas:book-open fa-fw</icon>
+        <menu>
+            <menuitem label='Hamburgueres'>
+                <icon>fas:hamburger</icon>
+                <action>PublicView</action>
+            </menuitem>
+            <menuitem label='Bebidas'>
+                <icon>fas:cocktail</icon>
+                <action>PublicView</action>
+               
+            </menuitem>
+            
+        </menu>
+    </menuitem>
+    <menuitem label='Carrinho'>
+      <icon>fas:shopping-cart fa-fw</icon>
+        <menu>
+           <menuitem label="Ver itens">
+        <action>Carrinho</action>
+        <icon>fas:shopping-cart fa-fw</icon>
+        </menuitem>
+          
+            
+        </menu>
+    </menuitem>
+    
+    <menuitem label='Área do Cliente'>
+     <icon>fa:sign-in-alt fa-fw</icon>
+        <menu>
+            <menuitem label='Login'>
+                <icon>fa:sign-in-alt fa-fw</icon>
+                <action>LoginForm</action>
+            </menuitem>
+            
+           <!--  <menuitem label='_t{Create account}'>
+                <icon>fa:user-plus fa-fw</icon>
+                <action>SystemRegistrationForm</action>
+            </menuitem> -->
+            
+            <menuitem label='_t{Reset password}'>
+                <icon>fa:eraser fa-fw</icon>
+                <action>SystemRequestPasswordResetForm</action>
+            </menuitem>
+        </menu>
+    </menuitem>
+</menu>

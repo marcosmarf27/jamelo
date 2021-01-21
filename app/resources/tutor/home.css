@@ -1,0 +1,56 @@
+.topic
+{
+    font-family: "Open Sans";
+    font-size: 12pt;
+    width: 100%;
+    padding: 8px;
+}
+
+.multicolumn
+{
+    width: 100%;
+    margin: auto;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+}
+
+.multicolumn .home-card {
+    font-family: "Open Sans";
+    font-size: 10pt;
+    color: #3F3F3F;
+    float: left;
+    line-height:1.5em;
+    width: calc(50% - 10px);
+    min-height: 60px;
+    padding: 17px;
+    margin: 5px;
+    text-decoration: none;
+    display: flex;
+    border: 1px solid #c9c9c9;
+    border-radius: 3px;
+}
+
+.container-fluid .multicolumn .home-card {
+    border: 0;
+}
+
+.multicolumn .home-card span {
+    text-decoration: none;
+    font-size: 12pt;
+}
+
+.multicolumn .home-card:hover
+{
+    background: whitesmoke;
+}
+
+.multicolumn .home-card i
+{
+    font-size: 17pt;
+}
+
+.multicolumn .home-card .home-card-content
+{
+    
+}
