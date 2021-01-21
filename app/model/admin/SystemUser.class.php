@@ -19,6 +19,7 @@ class SystemUser extends TRecord
     
     private $frontpage;
     private $unit;
+    private $endereco;
     //private $cliente;
     private $system_user_groups = array();
     private $system_user_programs = array();
@@ -412,6 +413,18 @@ class SystemUser extends TRecord
             }
         }
         return $collection;
+    }
+
+    function get_endereco()
+    {
+        // instantiates City, load $this->city_id
+        if (empty($this->endereco))
+        {
+            $this->endereco = new Endereco($this->id);
+        }
+        
+        // returns the City Active Record
+        return $this->endereco;
     }
   
 }

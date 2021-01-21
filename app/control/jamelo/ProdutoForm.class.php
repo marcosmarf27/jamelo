@@ -9,6 +9,7 @@ use Adianti\Widget\Container\TVBox;
 use Adianti\Widget\Form\TImageCropper;
 use Adianti\Widget\Util\TXMLBreadCrumb;
 use Adianti\Validator\TRequiredValidator;
+use Adianti\Widget\Form\TColor;
 use Adianti\Wrapper\BootstrapFormBuilder;
 /**
  * Product Form
@@ -40,6 +41,7 @@ class ProdutoForm extends TPage
         $id          = new TEntry('id');
         $description = new TEntry('descricao');
         $nome = new TEntry('nome');
+        $cor = new TColor('cor');
         $categoria    = new TDBCombo('categoria_id', 'jamelo', 'Categoria', 'id', 'nome');
         $sale_price  = new TEntry('preco');
 
@@ -73,7 +75,7 @@ class ProdutoForm extends TPage
         $this->form->addFields( [new TLabel('Descrição', 'red')], [$description] );
         $this->form->addFields([new TLabel('Preço', 'red')],  [$sale_price], [new TLabel('Categoria', 'red')],  [$categoria]);
       
-        $this->form->addFields( [new TLabel('Imagem')],  [$photo_path] );
+        $this->form->addFields( [new TLabel('Imagem')],  [$photo_path], [new TLabel('Cor')],  [$cor] );
        
         
         $id->setSize('50%');

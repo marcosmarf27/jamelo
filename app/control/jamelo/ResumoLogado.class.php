@@ -212,6 +212,9 @@ class ResumoLogado extends TPage
     }
 
     public function gerarPedido($param){
+       
+       try
+       {
         TTransaction::open('jamelo');
 
         $pedidos = TSession::getValue('cart_items');
@@ -242,6 +245,7 @@ class ResumoLogado extends TPage
                 
                 $item->produto_id = $product->id;
                 $item->preco = $product->preco;
+                $item->produto_categoria_id = $product->categoria_id;
                 $item->qtd      = $amount;
                 $item->subtotal  = $amount * $product->preco;
                 $item->pedido_id = $pedido->id;
@@ -261,12 +265,13 @@ class ResumoLogado extends TPage
 
         }
 
-        $pedido->total = $total;
-        $pedido->pontovalor = 0;
-        $pedido->valorcomdesc = $total;
+        $pedido->total = $total; //valor pedido original
+        $pedido->pontovalor = 0; //valor que foi descontado
+        $pedido->valorcomdesc = $total; //valor do pedido com desconto
+        $pedido->troco = abs($opcoes->troco -  $pedido->valorcomdesc);
         $pedido->store();
         //se não usar jamelos o sistema vai registrar os pontos
-        if ($opcoes->pagamento != '4'){
+      /*   if ($opcoes->pagamento != '4'){
 
             $fidelidade = new Fidelidade();
             $fidelidade->system_user_id = $pedido->system_user_id;
@@ -279,7 +284,7 @@ class ResumoLogado extends TPage
             $userpontos->pontos +=  $fidelidade->pontovalor ;
             $userpontos->store();
             
-        }
+        } */
 
         if($opcoes->pagamento == '4'){
 
@@ -328,72 +333,31 @@ class ResumoLogado extends TPage
         
         $this->onReload($param);
        
+        TTransaction::close();
 
-       // $html = new THtmlRenderer('app/resources/tutor/whatsapp.html');
-
-        /* $replace = array();
-        $replace['cliente']    = $usuario->name;
-        $replace['pedido']    = $pedido->id;
-       */
+       
+        $action = new TAction(array('PedidoListCliente', 'onReload'));
+        new TMessage('info', 'Seu pedido foi realizado com sucesso!', $action);
+       
+        }catch (Exception $e){
+           new TMessage('error', $e->getMessage());
+           TTransaction::rollback();
+       }
+       
         
-        // replace the main section variables
-       // $html->enableSection('main', $replace);
-        
-        // define the replacements based on customer contacts
-   /*      $replace = array();
-        $itens = TSession::getValue('itens');
-        foreach ($itens as $item)
-        {
-            $replace[] = array('descricao' => $item->descricao,
-                               'qtd'=> $item->qtd,
-                               'subtotal'=> $item->subtotal
-                            );
-        }
-        
-        // define with sections will be enabled
-        $totalsum['total'] = $total;
-        $html->enableSection('contacts', $totalsum);
-        $html->enableSection('contacts-detail', $replace, TRUE);
-        $msg = $html->getContents(); */
-
-
-       /*  //envio mensagem whatsapp
-        $data = [
-            'phone' => '5588992798233', // Receivers phone
-            'body' => $msg
-        ];
-        $json = json_encode($data); // Encode data to JSON
-        // URL for request POST /message
-        //$token = 'hdszxyxrv1490mda';
-        //$instanceId = '216149';
-        //https://eu153.chat-api.com/instance216149/sendMessage?token=hdszxyxrv1490mda
-        //$url = 'https://eu153.chat-api.com/instance'.$instanceId.'/sendMessage?token='.$token;
-        $url = 'https://eu153.chat-api.com/instance216149/sendMessage?token=hdszxyxrv1490mda';
-        // Make a POST request
-        $options = stream_context_create(['http' => [
-                'method'  => 'POST',
-                'header'  => 'Content-type: application/json',
-                'content' => $json
-            ]
-        ]);
-        // Send a request
-        $result = file_get_contents($url, false, $options); */
+       
+    }
 
       
 
 
 
-        TTransaction::close();
 
 
-        $action = new TAction(array('PedidoListCliente', 'onReload'));
-        new TMessage('info', 'Seu pedido foi realizado com sucesso!', $action);
-       
 
         
 
 
-    }
 
     public static function onChangeType($param)
     {

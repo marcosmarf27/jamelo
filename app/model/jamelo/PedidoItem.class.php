@@ -14,6 +14,9 @@ class PedidoItem extends TRecord
     const TABLENAME = 'pedido_item';
     const PRIMARYKEY= 'id';
     const IDPOLICY =  'max'; // {max, serial}
+
+    private $pedido;
+    private $item;
     
     
     /**
@@ -27,6 +30,31 @@ class PedidoItem extends TRecord
         parent::addAttribute('preco');
         parent::addAttribute('subtotal');
         parent::addAttribute('pedido_id');
+        parent::addAttribute('produto_categoria_id');
        
+    }
+
+    function get_pedido()
+    {
+        // instantiates City, load $this->city_id
+        if (empty($this->pedido))
+        {
+            $this->pedido = new Pedido($this->pedido_id);
+        }
+        
+        // returns the City Active Record
+        return $this->pedido;
+    }
+    
+    function get_item()
+    {
+        // instantiates City, load $this->city_id
+        if (empty($this->item))
+        {
+            $this->item = new Produto($this->produto_id);
+        }
+        
+        // returns the City Active Record
+        return $this->item;
     }
 }

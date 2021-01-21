@@ -20,6 +20,10 @@
     <action>PedidosList</action>
     <icon>fas:arrow-circle-right fa-fw</icon>
   </menuitem>
+  <menuitem label="Cozinha">
+    <action>CozinhaList</action>
+    <icon>fas:list fa-fw</icon>
+  </menuitem>
   <menuitem label="Cadastro de Produtos">
     <action>ProdutoList</action>
     <icon>fas:clipboard-list fa-fw</icon>

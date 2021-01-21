@@ -46,7 +46,8 @@ class PedidosList extends TPage
         $this->setActiveRecord('Pedido');         // defines the active record
         $this->setDefaultOrder('id', 'desc');    // defines the default order
         $this->addFilterField('id', '=', 'id'); // filterField, operator, formField
-        $this->addFilterField('system_user_id', '=', 'system_user_id'); // filterField, operator, formField
+        $this->addFilterField('system_user_id', '=', 'system_user_id');
+        //$this->addFilterField('fase', '=', 'fase'); // filterField, operator, formField
         
     /*     $this->addFilterField('data_pedido', '>=', 'date_from', function($value) {
             return TDate::convertToMask($value, 'dd/mm/yyyy', 'yyyy-mm-dd');
@@ -87,18 +88,28 @@ class PedidosList extends TPage
         // add the search form actions
         $this->form->addAction('Buscar', new TAction([$this, 'onSearch']), 'fa:search');
         $this->form->addActionLink('Inserir pedido manual',  new TAction(['PedidoForm', 'onEdit']), 'fa:plus green');
+        $this->form->addExpandButton();
         
         // creates a DataGrid
         $this->datagrid = new BootstrapDatagridWrapper(new TDataGrid);
         $this->datagrid->width = '100%';
+        $this->datagrid->datatable = 'true';
         
         // creates the datagrid columns
-        $column_id       = new TDataGridColumn('id', 'Nº Pedido', 'center', '10%');
-        $column_date     = new TDataGridColumn('data_pedido', 'Horário', 'center', '15%');
-        $column_customer = new TDataGridColumn('cliente->name', 'Cliente', 'left', '30%');
-        $column_valorr = new TDataGridColumn('total', 'Valor', 'left', '10%');
-        $column_status    = new TDataGridColumn('status', 'Pago?', 'right', '15%');
-        $column_fase    = new TDataGridColumn('fase', 'Fase Atual', 'right', '25%');
+        $column_id       = new TDataGridColumn('id', 'Nº', 'center', '5%');
+        $column_date     = new TDataGridColumn('data_pedido', 'Horário', 'center', '5%');
+        $column_customer = new TDataGridColumn('cliente->name', 'Cliente', 'left', '5%');
+        $column_fase    = new TDataGridColumn('fase', 'Fase', 'right', '40%');
+        $column_valorpedido = new TDataGridColumn('valorcomdesc', 'Valor', 'left', '5%');
+        $column_troco = new TDataGridColumn('troco', 'Troco', 'left', '5%');
+        $column_endereco = new TDataGridColumn('cliente->endereco->rua', 'Rua', 'left', '5%');
+        $column_numero = new TDataGridColumn('cliente->endereco->numero', 'Número', 'left', '5%');
+        $column_bairro = new TDataGridColumn('cliente->endereco->bairro', 'Bairro', 'left', '5%');
+        $column_obs = new TDataGridColumn('cliente->endereco->obs', 'Ponto de Referência', 'left', '5%');
+        $column_obspedido = new TDataGridColumn('obs', 'Ajustes Pedido', 'left', '5%');
+       //$column_valorr = new TDataGridColumn('total', 'Valor', 'left', '15%');
+       // $column_status    = new TDataGridColumn('status', 'Pago?', 'right', '15%');
+      
         $column_customer->setDataProperty('style','font-weight: bold');
       
         
@@ -117,22 +128,31 @@ class PedidosList extends TPage
         // add the columns to the DataGrid
         $this->datagrid->addColumn($column_id);
        
-        $this->datagrid->addColumn($column_status);
-        $this->datagrid->addColumn($column_valorr);
+       // $this->datagrid->addColumn($column_status);
+       // $this->datagrid->addColumn($column_valorr);
         $this->datagrid->addColumn($column_customer);
+      
+        $this->datagrid->addColumn($column_fase);
         $this->datagrid->addColumn($column_date);
+        $this->datagrid->addColumn($column_valorpedido);
+        $this->datagrid->addColumn($column_troco);
+        $this->datagrid->addColumn($column_endereco);
+        $this->datagrid->addColumn($column_numero);
+        $this->datagrid->addColumn($column_bairro);
+        $this->datagrid->addColumn($column_obs);
+        $this->datagrid->addColumn($column_obspedido);
         //$this->datagrid->addColumn($column_total);
        
-        $this->datagrid->addColumn($column_fase);
+      
 
-        $column_status->setTransformer(function($value) {
+       /*  $column_status->setTransformer(function($value) {
             $result = Status::findInTransaction('jamelo', $value)->nome;
             $div = new TElement('span');
             $div->class="label label-warning";
             $div->style="text-shadow:none; font-size:12px";
             $div->add($result);
             return $div;
-        });
+        }); */
 
         $column_fase->setTransformer(function($value) {
             
@@ -170,6 +190,17 @@ class PedidosList extends TPage
                         $div->add($result);
                         return "{$icon} $div";
                         break;
+                        case 4:
+                            $icon  = "<i class='fas fa-check-circle' aria-hidden='true'></i>";
+                            
+                            
+                            $result =  Fase::findInTransaction('jamelo', $value)->nome;
+                            $div = new TElement('span');
+                            $div->class="label label-danger";
+                            $div->style="text-shadow:none; font-size:10px";
+                            $div->add($result);
+                            return "{$icon} $div";
+                            break;
                     
                     
 
@@ -178,30 +209,42 @@ class PedidosList extends TPage
              
              });
 
-       $column_valorr->setTransformer($format_value);
+       //$column_valorr->setTransformer($format_value);
         
         // creates the datagrid column actions
         $column_id->setAction(new TAction([$this, 'onReload']),   ['order' => 'id']);
-        $column_date->setAction(new TAction([$this, 'onReload']), ['order' => 'data_pedido']);
+       // $column_date->setAction(new TAction([$this, 'onReload']), ['order' => 'data_pedido']);
         
         // define the transformer method over date
         $column_date->setTransformer( function($value, $object, $row) {
             $date = new DateTime($value);
-            return $date->format('d/m/Y H:i:s');
+            return $date->format('H:i:s');
         });
 
         //$action_view   = new TDataGridAction(['SaleSidePanelView', 'onView'],   ['key' => '{id}', 'register_state' => 'false'] );
-        $action_edit   = new TDataGridAction(['PedidoForm', 'onEdit'],   ['key' => '{id}'] );
+        //$action_edit   = new TDataGridAction(['PedidoForm', 'onEdit'],   ['key' => '{id}'] );
+      //  $action_cozinha   = new TDataGridAction(['CozinhaList', 'onReload'],  ['key' => '{id}']);
         $action_confirm   = new TDataGridAction([$this, 'confirmarPedido'],   ['key' => '{id}'] );
         $action_entregar   = new TDataGridAction([$this, 'entregarPedido'],   ['key' => '{id}'] );
-        $action_endereco   = new TDataGridAction(['EnderecoFormWindow', 'loadPage'],   ['system_user_id' => '{system_user_id}'] );
+        $action_concluir   = new TDataGridAction([$this, 'concluirPedido'],   ['key' => '{id}', 'cliente' => '{system_user_id}'] );
+
+        $action_confirm->setDisplayCondition( array($this, 'displayConfirm') );
+        $action_entregar->setDisplayCondition( array($this, 'displayEntregar') );
+        $action_concluir->setDisplayCondition( array($this, 'displayConcluir') );
+        //$action_endereco   = new TDataGridAction(['EnderecoFormWindow', 'loadPage'],   ['system_user_id' => '{system_user_id}'] );
         //$action_delete = new TDataGridAction([$this, 'onDelete'],   ['key' => '{id}'] );
-        
-       // $this->datagrid->addAction($action_view, _t('View details'), 'fa:search green fa-fw');
+        //$this->datagrid->addAction($action_cozinha, 'Ver itens na cozinha...', 'fas:list fa-fw');
+        $this->datagrid->addAction($action_confirm, 'Confirmar pedido e enviar para cozinha', 'fas:check green fa-fw');
+        $this->datagrid->addAction($action_entregar, 'Pedido pronto, enviar para entrega', 'fas:motorcycle fa-fw');
+        $this->datagrid->addAction($action_concluir, 'Confirmar entrega e concluir pedido', 'fas:cash-register blue fa-fw');
+        $action_confirm->setUseButton(TRUE);
+        $action_entregar->setUseButton(TRUE);
+        $action_concluir->setUseButton(TRUE);
+      
       /*   $this->datagrid->addAction($action_edit, 'Edit',   'far:edit blue fa-fw');
         $this->datagrid->addAction($action_delete, 'Delete', 'far:trash-alt red fa-fw'); */
 
-        $action_edit->setLabel('Editar pedido');
+        /* $action_edit->setLabel('Editar pedido');
         $action_edit->setImage('far:edit blue fa-fw');
 
         $action_endereco->setLabel('Endereços');
@@ -225,7 +268,7 @@ class PedidosList extends TPage
         $action_group->addAction($action_entregar);
         
         // add the actions to the datagrid
-        $this->datagrid->addActionGroup($action_group);
+        $this->datagrid->addActionGroup($action_group); */
         
         // create the datagrid model
         $this->datagrid->createModel();
@@ -238,9 +281,11 @@ class PedidosList extends TPage
         $container = new TVBox;
         $container->style = 'width: 100%';
        // $container->add(new TXMLBreadCrumb('menu.xml', __CLASS__));
-        $container->add($this->form);
+        //$container->add($this->form);
         $container->add($panel = TPanelGroup::pack('', $this->datagrid, $this->pageNavigation));
-        $panel->getBody()->style = 'overflow-x:auto; min-height: 350px';
+        $panel->getBody()->style = 'overflow-x:auto;';
+       // $panel->addHeaderActionLink( 'PDF', new TAction([$this, 'exportAsPDF'], ['register_state' => 'false']), 'far:file-pdf red' );
+        $panel->addHeaderActionLink( 'Ver Cozinha', new TAction(['CozinhaList', 'onReload'], ['register_state' => 'false']), 'fa:table blue' );
         parent::add($container);
     }
 
@@ -285,11 +330,153 @@ class PedidosList extends TPage
         $msg->store();
 
         $action = new TAction(array('PedidosList', 'onReload'));
-        new TMessage('info', 'Pedido confirmado com sucesso!', $action);
+        new TMessage('info', 'Pedido recebido com sucesso!', $action);
 
         TTransaction::close();
 
 
         
+    }
+
+    public function concluirPedido($param){
+
+        TTransaction::open('jamelo');
+
+        $pedido = new Pedido($param['key']);
+        $pedido->fase = 4;
+        $pedido->store();
+        if ($pedido->pagamento != 4){
+           
+            $fidelidade = new Fidelidade();
+            $fidelidade->system_user_id = $pedido->system_user_id;
+            $fidelidade->pedido_id = $pedido->id;
+            $fidelidade->valorpedido = $pedido->total;
+            $fidelidade->pontovalor = $pedido->total * 0.1;
+            $fidelidade->store();
+           
+            $userpontos = new SystemUser($param['cliente']);
+            $userpontos->pontos +=  $fidelidade->pontovalor ;
+            $userpontos->store();
+            
+            $msg = new SystemMessage();
+            $msg->system_user_id = 1; //admnistrador que envia mensagem
+            $msg->system_user_to_id = $pedido->system_user_id;
+           
+            $msg->subject = "Você ganhou <b> {$fidelidade->pontovalor}</b> jamelos";
+            $msg->message = '<p>Obrigado,</p><p>Agradecemos a preferência e <b>ficamos felizes </b>!</p><p><br></p><p>Atenciosamente,&nbsp;</p><p>Jamelo</p>';
+            $msg->dt_message = date('Y-m-d H:i:s');
+            $msg->checked = 'N';
+            $msg->store();
+        }
+       
+        
+
+            $msg = new SystemMessage();
+            $msg->system_user_id = 1; //admnistrador que envia mensagem
+            $msg->system_user_to_id = $pedido->system_user_id;
+           
+            $msg->subject = "Pedido concluido e entregue";
+            $msg->message = '<p>Obrigado,</p><p>Agradecemos a preferência e <b>ficamos felizes </b>!</p><p><br></p><p>Atenciosamente,&nbsp;</p><p>Jamelo</p>';
+            $msg->dt_message = date('Y-m-d H:i:s');
+            $msg->checked = 'N';
+            $msg->store();
+
+        
+       
+
+        $action = new TAction(array('PedidosList', 'onReload'));
+        new TMessage('info', 'Pedido Concluido com sucesso!', $action);
+
+        TTransaction::close();
+
+
+        
+    }
+
+    public function displayConfirm( $object )
+    {
+        if ($object->fase == 1)
+        {
+            return TRUE;
+        }
+        return FALSE;
+    }
+    public function displayEntregar( $object )
+    {
+        if ($object->fase == 2)
+        {
+            return TRUE;
+        }
+        return FALSE;
+    }
+
+    public function displayConcluir( $object )
+    {
+        if ($object->fase == 3 )
+        {
+            return TRUE;
+        }
+        return FALSE;
+    }
+    public function exportAsPDF($param)
+    {
+        try
+        {
+            // string with HTML contents
+            $html = clone $this->datagrid;
+            $contents = file_get_contents('app/resources/styles-print.html') . $html->getContents();
+            
+            // converts the HTML template into PDF
+            $dompdf = new \Dompdf\Dompdf();
+            $dompdf->loadHtml($contents);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+            
+            $file = 'app/output/datagrid-export.pdf';
+            
+            // write and open file
+            file_put_contents($file, $dompdf->output());
+            
+            $window = TWindow::create('Export', 0.8, 0.8);
+            $object = new TElement('object');
+            $object->data  = $file;
+            $object->type  = 'application/pdf';
+            $object->style = "width: 100%; height:calc(100% - 10px)";
+            $window->add($object);
+            $window->show();
+        }
+        catch (Exception $e)
+        {
+            new TMessage('error', $e->getMessage());
+        }
+    }
+    
+    /**
+     * Export datagrid as CSV
+     */
+    public function exportAsCSV($param)
+    {
+        try
+        {
+            // get datagrid raw data
+            $data = $this->datagrid->getOutputData();
+            
+            if ($data)
+            {
+                $file    = 'app/output/datagrid-export.csv';
+                $handler = fopen($file, 'w');
+                foreach ($data as $row)
+                {
+                    fputcsv($handler, $row);
+                }
+                
+                fclose($handler);
+                parent::openFile($file);
+            }
+        }
+        catch (Exception $e)
+        {
+            new TMessage('error', $e->getMessage());
+        }
     }
 }

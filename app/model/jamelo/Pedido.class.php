@@ -17,6 +17,7 @@ class Pedido extends TRecord
    // const CREATEDAT = 'criacao';
     //const UPDATEDAT = 'atualizacao';
     private $cliente;
+   
     
     
     /**
@@ -54,4 +55,6 @@ class Pedido extends TRecord
         // returns the City Active Record
         return $this->cliente;
     }
+
+    
 }

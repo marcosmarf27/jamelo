@@ -27,5 +27,6 @@ class Produto extends TRecord
         parent::addAttribute('imagem');
         parent::addAttribute('categoria_id');
         parent::addAttribute('nome');
+        parent::addAttribute('cor');
     }
 }

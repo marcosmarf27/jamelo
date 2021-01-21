@@ -163,7 +163,7 @@ class Resumo extends TPage
         $formapagamento    = new TDBRadioGroup('pagamento', 'jamelo', 'Pagamento', 'id', 'nome');
         $obs   = new TText('obs');
         $obs->placeholder = 'Digite aqui ajustes que deseja fazer no seu pedido Ex. Não colocar cebola....';
-        $troco->setNumericMask(2, ',', '.', TRUE);
+        $troco->setNumericMask(2, '.', ',', TRUE);
         //$troco->setTip('Informe o troco para quanto');
         $troco->placeholder = 'Informe o troco...';
 
@@ -201,6 +201,7 @@ class Resumo extends TPage
         $pedido->obs = $opcoes->obs;
         $pedido->status = 1 ;
         $pedido->fase = 1 ;
+      
         $pedido->store();
         //gera os itens
         $itens = array();
@@ -215,6 +216,7 @@ class Resumo extends TPage
                 $item = new StdClass;
                 
                 $item->produto_id = $product->id;
+                $item->produto_categoria_id = $product->categoria_id;
                 $item->preco = $product->preco;
                 $item->qtd      = $amount;
                 $item->subtotal  = $amount * $product->preco;
@@ -238,8 +240,11 @@ class Resumo extends TPage
         $pedido->total = $total;
         $pedido->pontovalor = 0;
         $pedido->valorcomdesc = $total;
+        $pedido->troco = abs($opcoes->troco -  $pedido->valorcomdesc);
+        print_r($opcoes->troco);
+        print_r($pedido->valorcomdesc);
         $pedido->store();
-        if ($opcoes->pagamento != '4'){
+       /*  if ($opcoes->pagamento != '4'){
 
             $fidelidade = new Fidelidade();
             $fidelidade->system_user_id = $pedido->system_user_id;
@@ -252,7 +257,7 @@ class Resumo extends TPage
             $userpontos->pontos +=  $fidelidade->pontovalor ;
             $userpontos->store();
             
-        }
+        } */
       
 
         //TSession::setValue('itens', $itens);

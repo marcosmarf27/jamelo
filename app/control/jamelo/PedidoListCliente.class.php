@@ -181,6 +181,17 @@ class PedidoListCliente extends TPage
                         $div->add($result);
                         return "{$icon} $div";
                         break;
+                    case 4:
+                        $icon  = "<i class='fas fa-check-circle' aria-hidden='true'></i>";
+                        
+                        
+                        $result =  Fase::findInTransaction('jamelo', $value)->nome;
+                        $div = new TElement('span');
+                        $div->class="label label-warning";
+                        $div->style="text-shadow:none; font-size:10px";
+                        $div->add($result);
+                        return "{$icon} $div";
+                        break;
                     
                     
 
@@ -252,7 +263,7 @@ class PedidoListCliente extends TPage
         $totalponto = new SystemUser(TSession::getValue('userid'));
         if($totalponto->pontos >= 0){
             $totalpontoformatado = number_format($totalponto->pontos, 2, ',', '.');
-            $indicator1->enableSection('main', ['title'     => 'Pontos/Valores acumulados',
+            $indicator1->enableSection('main', ['title'     => 'Seus Jamelos acumulados',
             'icon'       => 'fas fa-money-bill-wave',
             'background' => 'green',
             'value'      =>'R$' . $totalpontoformatado ] );
@@ -265,21 +276,16 @@ class PedidoListCliente extends TPage
         }
      
         
-    /*     $indicator2->enableSection('main', ['title'      => 'Valores Usados',
-                                            'icon'       => 'user',
-                                            'background' => 'orange',
-                                            'value'      =>  0.00 ] ); */
+   
 
 
                                             TTransaction::close();
         $div->add( $i1 = TElement::tag('div', $indicator1) );
-        //$div->add( $i2 = TElement::tag('div', $indicator2) );
-        
-      
-        
         $i1->class = 'col-sm-12';
-        //$i2->class = 'col-sm-6';
+     
       
+        
+       
         
         // create the page navigation
         $this->pageNavigation = new TPageNavigation;

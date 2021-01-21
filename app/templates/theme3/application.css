@@ -165,6 +165,27 @@ ul#side-menu a span{
 	font-family:'ABeeZee', sans-serif !important;
 }
 
+.fb-field-container input[type=text]{
+	border-top-left-radius:10px;
+	border-top-right-radius:11px;
+	border-bottom-left-radius:13px;
+	border-bottom-right-radius:13px;
+}
+#cozinhaitem{
+	height:0px !important;
+	font-size:16px !important;
+	text-shadow:rgba(0, 0, 0, 0.3) 0px 1px 1px;
+	border-top-left-radius:9px;
+	border-top-right-radius:8px;
+	border-bottom-left-radius:8px;
+	border-bottom-right-radius:8px;
+	box-shadow:0px 0px 9px 0px #6c4141;
+}
+
+
+
+
+
 
 
 
