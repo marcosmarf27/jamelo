@@ -201,7 +201,7 @@ class ResumoLogado extends TPage
         $obs   = new TText('obs');
         $obs->setSize('100%', 100);
         $obs->placeholder = 'Digite aqui ajustes que deseja fazer no seu pedido Ex. Não colocar cebola....';
-        $troco->setNumericMask(2, ',', '.', TRUE);
+        $troco->setNumericMask(2, '.', ',', TRUE);
         //$troco->setTip('Informe o troco para quanto');
         $troco->placeholder = 'Informe o troco...';
 
