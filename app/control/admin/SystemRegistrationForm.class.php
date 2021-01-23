@@ -51,7 +51,7 @@ class SystemRegistrationForm extends TPage
         $repassword->setSize('100%');
         $email->setSize('100%');
 
-        $login->forceUpperCase();
+       // $login->forceUpperCase();
         $name->forceUpperCase();
         $email->forceUpperCase();
         
