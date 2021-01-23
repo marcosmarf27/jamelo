@@ -47,6 +47,9 @@ class PedidosList extends TPage
         $this->setDefaultOrder('id', 'desc');    // defines the default order
         $this->addFilterField('id', '=', 'id'); // filterField, operator, formField
         $this->addFilterField('system_user_id', '=', 'system_user_id');
+        $criteria = new TCriteria();
+        $criteria->add(new TFilter('fase','!=', '4'));
+        $this->setCriteria($criteria);
         //$this->addFilterField('fase', '=', 'fase'); // filterField, operator, formField
         
     /*     $this->addFilterField('data_pedido', '>=', 'date_from', function($value) {
