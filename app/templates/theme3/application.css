@@ -273,6 +273,10 @@ li#support a{
 	opacity:0;
 }
 
+.table-striped .child .child{
+	background-color:#ecf0f1 !important;
+}
+
 
 
 
