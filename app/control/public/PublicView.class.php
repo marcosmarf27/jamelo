@@ -15,6 +15,6 @@ class PublicView extends TPage
     {
         parent::__construct();
         
-        //AdiantiCoreApplication::loadPage('OfertaList', 'abrir');
+        AdiantiCoreApplication::loadPage('OfertaList', 'abrir');
     }
 }

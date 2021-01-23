@@ -277,6 +277,10 @@ li#support a{
 	background-color:#ecf0f1 !important;
 }
 
+.fb-field-container input[type=text]{
+	font-family:'Knewave', display !important;
+}
+
 
 
 
