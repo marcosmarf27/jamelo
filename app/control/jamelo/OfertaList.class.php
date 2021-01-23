@@ -9,6 +9,7 @@ use Adianti\Widget\Util\TCardView;
 use Adianti\Widget\Container\TVBox;
 use Adianti\Widget\Util\TXMLBreadCrumb;
 use Adianti\Core\AdiantiCoreApplication;
+use Adianti\Database\TTransaction;
 use Adianti\Widget\Container\TPanelGroup;
 use Adianti\Wrapper\BootstrapFormBuilder;
 use Adianti\Widget\Datagrid\TPageNavigation;
@@ -42,7 +43,19 @@ class OfertaList extends TPage
         $this->setActiveRecord('Produto');
         $this->addFilterField('descricao', 'ilike', 'descricao');
 
-     
+        TTransaction::open('jamelo');
+        $preferencias = SystemPreference::getAllPreferences();
+
+    
+
+        if($preferencias){
+
+            if($preferencias['desligado'] == 'sim'){
+                AdiantiCoreApplication::loadPage('Desligado', 'loadPage');
+            }
+        }
+
+        TTransaction::close();
         // creates the form
         $this->form = new BootstrapFormBuilder('form_search_Product');
         $this->form->setFormTitle('Faça seu pedido...');

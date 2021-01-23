@@ -26,6 +26,20 @@ class ResumoLogado extends TPage
     public function __construct()
     {
         parent::__construct();
+
+        TTransaction::open('jamelo');
+        $preferencias = SystemPreference::getAllPreferences();
+
+    
+
+        if($preferencias){
+
+            if($preferencias['desligado'] == 'sim'){
+                AdiantiCoreApplication::loadPage('Desligado', 'loadPage');
+            }
+        }
+
+        TTransaction::close();
         
         //parent::setTargetContainer("adianti_right_panel");
        

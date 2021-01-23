@@ -1,4 +1,11 @@
 <?php
+
+use Adianti\Widget\Form\TCheckButton;
+use Adianti\Widget\Form\TCheckGroup;
+use Adianti\Widget\Form\TRadioGroup;
+use Adianti\Widget\Form\TSpinner;
+use Adianti\Widget\Form\TTime;
+
 /**
  * SystemPreferenceForm
  *
@@ -37,6 +44,13 @@ class SystemPreferenceForm extends TStandardForm
         $smtp_pass   = new TPassword('smtp_pass');
         $mail_from   = new TEntry('mail_from');
         $mail_support= new TEntry('mail_support');
+        $horario_inicio= new TTime('inicio');
+        $horario_fim= new TTime('fim');
+        $desligar= new TRadioGroup('desligado');
+        $desligar->addItems(array('sim' => 'Desligar', 'nao' => 'Ligar'));
+        $desligar->setUseButton();
+        $desligar->setLayout('horizontal');
+
         
         $smtp_host->placeholder = 'ssl://smtp.gmail.com, tls://server.company.com';
         
@@ -52,6 +66,9 @@ class SystemPreferenceForm extends TStandardForm
         $this->form->addFields( [new TLabel(_t('SMTP User'))], [$smtp_user] );
         $this->form->addFields( [new TLabel(_t('SMTP Pass'))], [$smtp_pass] );
         $this->form->addFields( [new TLabel(_t('Support mail'))], [$mail_support] );
+        $this->form->addFields( [new TLabel('Inicio')], [$horario_inicio] );
+        $this->form->addFields( [new TLabel('Fim de expediente')], [$horario_fim] );
+        $this->form->addFields( [new TLabel('CONTROLE SISTEMA')], [$desligar] );
         
         $mail_from->setSize('70%');
         $smtp_auth->setSize('70%');

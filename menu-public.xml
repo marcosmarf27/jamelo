@@ -51,11 +51,11 @@
         <menu>
             <menuitem label='Hamburgueres'>
                 <icon>fas:hamburger</icon>
-                <action>PublicView</action>
+                <action>OfertaList</action>
             </menuitem>
             <menuitem label='Bebidas'>
                 <icon>fas:cocktail</icon>
-                <action>PublicView</action>
+                <action>OfertaList</action>
                
             </menuitem>
             

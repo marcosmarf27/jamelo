@@ -311,6 +311,7 @@ class PedidosList extends TPage
         $msg->store();
         $action = new TAction(array('PedidosList', 'onReload'));
         new TMessage('info', 'Pedido enviado para entrega!', $action);
+       
 
         TTransaction::close();
 
