@@ -52,8 +52,8 @@ class SystemRegistrationForm extends TPage
         $email->setSize('100%');
 
        // $login->forceUpperCase();
-        $name->forceUpperCase();
-        $email->forceUpperCase();
+      //  $name->forceUpperCase();
+       // $email->forceUpperCase();
         
         $telefone->setMask('(99)99999-9999', true);
         $telefone->placeholder = '(00) 00000-0000';
