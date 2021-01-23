@@ -2,9 +2,14 @@
 
 
 
+
 use Adianti\Control\TPage;
 use Adianti\Control\TAction;
+use Adianti\Database\TFilter;
 use Adianti\Registry\TSession;
+use Adianti\Database\TCriteria;
+use Adianti\Widget\Form\TEntry;
+use Adianti\Widget\Base\TElement;
 use Adianti\Database\TTransaction;
 use Adianti\Widget\Container\TVBox;
 use Adianti\Widget\Util\TActionLink;
@@ -13,7 +18,6 @@ use Adianti\Widget\Util\TXMLBreadCrumb;
 use Adianti\Widget\Container\TPanelGroup;
 use Adianti\Widget\Datagrid\TDataGridAction;
 use Adianti\Widget\Datagrid\TDataGridColumn;
-use Adianti\Widget\Form\TEntry;
 use Adianti\Wrapper\BootstrapDatagridWrapper;
 
 class Resumo extends TPage
@@ -158,9 +162,10 @@ class Resumo extends TPage
         $troco = new TEntry('troco');
         $jamelo = new TEntry('jamelo');
         $jamelo->setTip('Seus Jamelos acumulados');
-       
         
-        $formapagamento    = new TDBRadioGroup('pagamento', 'jamelo', 'Pagamento', 'id', 'nome');
+        $filtro = new TCriteria;
+        $filtro->add(new TFilter('id', 'IN', array(1, 2, 3)));
+        $formapagamento    = new TDBRadioGroup('pagamento', 'jamelo', 'Pagamento', 'id', 'nome', 'id', $filtro);
         $obs   = new TText('obs');
         $obs->placeholder = 'Digite aqui ajustes que deseja fazer no seu pedido Ex. Não colocar cebola....';
         $troco->setNumericMask(2, '.', ',', TRUE);

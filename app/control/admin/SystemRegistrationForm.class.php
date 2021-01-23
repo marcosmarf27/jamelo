@@ -50,8 +50,14 @@ class SystemRegistrationForm extends TPage
         $password->setSize('100%');
         $repassword->setSize('100%');
         $email->setSize('100%');
+
+        $login->forceUpperCase();
+        $name->forceUpperCase();
+        $email->forceUpperCase();
         
         $telefone->setMask('(99)99999-9999', true);
+        $telefone->placeholder = '(00) 00000-0000';
+        $telefone->addValidation('Telefone', new TMinLengthValidator, array(9));
 
         $this->form->addFields( [new TLabel(_t('Login'))],    [$login] );
         $this->form->addFields( [new TLabel(_t('Name'))],     [$name] );

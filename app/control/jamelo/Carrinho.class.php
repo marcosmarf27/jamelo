@@ -22,6 +22,7 @@ class Carrinho extends TPage
         
         $this->datagrid = new BootstrapDatagridWrapper(new TDataGrid);
         $this->datagrid->width = '100%';
+        $this->datagrid->class = 'carrinho';
         $preco = new TDataGridColumn('sale_price', 'Preço', 'right',   '30%');
         $qtd = new TDataGridColumn('amount', 'Qtd', 'right',   '30%');
         // add the columns
@@ -38,8 +39,10 @@ class Carrinho extends TPage
         // creates the datagrid model
         $this->datagrid->createModel();
         
-        $back = new TActionLink('Continuar comprando...', new TAction(array($this, 'onClose')), 'black', null, null, 'fa:arrow-left green');
+        $back = new TActionLink('Continuar comprando...', new TAction(array($this, 'onClose')), 'black', null, null, 'fa:arrow-right green');
         $back->addStyleClass('btn btn-default btn-sm');
+        $fazerpedido= new TActionLink('Concluir e fazer pedido', new TAction(array('ConcluindoCompra', 'LoadPage'), ['register_state' => 'false']), 'black', null, null, 'fas:money-check-alt white');
+        $fazerpedido->addStyleClass('btn btn-success btn-sm');
        
 
         
@@ -60,9 +63,11 @@ class Carrinho extends TPage
         });
         
         $panel = new TPanelGroup;
+        $panel->add($fazerpedido);
         $panel->add($this->datagrid);
+      
         $panel->addFooter($back);
-        $panel->addHeaderActionLink( 'Concluir e fazer pedido', new TAction(['ConcluindoCompra', 'LoadPage'], ['register_state' => 'false']), 'fas:money-check-alt green' );
+        //$panel->addHeaderActionLink( 'Concluir e fazer pedido', new TAction(['ConcluindoCompra', 'LoadPage'], ['register_state' => 'false']), 'fas:money-check-alt green' );
         
         parent::add($panel);
     }
@@ -97,7 +102,7 @@ class Carrinho extends TPage
                     
                     $item = new StdClass;
                     $item->id          = $product->id;
-                    $item->description = $product->descricao;
+                    $item->description = $product->nome;
                     $item->amount      = $amount;
                     $item->sale_price  = $amount * $product->preco;
                     

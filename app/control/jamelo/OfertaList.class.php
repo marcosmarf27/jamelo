@@ -68,9 +68,9 @@ class OfertaList extends TPage
 		
         $this->cards->setItemTemplate('<div style="float:left;width:50%;padding-right:10px">
                                            <br  ><b id = "nomeproduto">{nome} </b> <br> 
-		                                   <br> {descricao} <br>
+		                                   <br> <i id = "descricao" >{descricao}</i> <br>
 		                                  
-		                                    <br> R${preco}
+		                                    <br> <i id = "preco" >R${preco}</i>
 		                               </div>
 		                               <div style="float:right;width:50%">
 		                                   <img style="height:100px;float:right;margin:5px" src="{imagem}">
@@ -115,7 +115,7 @@ class OfertaList extends TPage
 
      
        
-        
+        TToast::show('success', "Item adicionado...", 'bottom center', 'far:check-circle' );
         AdiantiCoreApplication::loadPage('Carrinho', 'onReload', ['adianti_target_container' => 'adianti_right_panel', 'register_state' => 'false']);
     }
     public function abrir(){

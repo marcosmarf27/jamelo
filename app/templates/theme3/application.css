@@ -7,6 +7,14 @@
     font-style: normal;
 
 }
+@font-face {
+    font-family: 'handregular';
+    src: url('./just/justanotherhand-regular-webfont.woff2') format('woff2'),
+         url('./just/justanotherhand-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
 .main-header .logo{
 	background-color:#992162 !important;
 }
@@ -114,19 +122,8 @@ b#nomeproduto{
 	border-bottom-right-radius:10px !important;
 }
 
-#tab_bform_1185275809_0 .form-group .fb-field-container .form-line .form-control{
-	border-top-left-radius:10px !important;
-	border-top-right-radius:10px !important;
-	border-bottom-right-radius:10px !important;
-	border-bottom-left-radius:10px !important;
-}
 
-#select2-tcombo_1732744292-container{
-	border-top-left-radius:11px !important;
-	border-top-right-radius:9px !important;
-	border-bottom-left-radius:13px !important;
-	border-bottom-right-radius:8px !important;
-}
+
 
 .selection .select2-selection--single{
 	border-top-right-radius:10px !important;
@@ -181,6 +178,106 @@ ul#side-menu a span{
 	border-bottom-right-radius:8px;
 	box-shadow:0px 0px 9px 0px #6c4141;
 }
+
+
+.carrinho tr .label-success{
+	font-size:9.7px !important;
+}
+
+i#descricao{
+	font-family:'Handlee', handwriting !important;
+	font-size:14.9px;
+}
+
+i#preco{
+	font-family:'Handlee', handwriting !important;
+	font-size:19.7px;
+}
+
+.card-wrapper .card-item{
+	width:315px !important;
+}
+
+b#nomeproduto{
+	font-size:16.9px !important;
+}
+
+.card-wrapper .panel-body div{
+	display:block;
+}
+
+.steps li .step-title{
+	font-size:10.3px;
+}
+
+.main-header .sidebar-toggle .icon-bar{
+	font-size:13.4px;
+}
+
+.main-header .sidebar-toggle{
+	font-size:36.7px;
+}
+
+.user-menu .fa-user{
+	font-size:34.8px;
+}
+
+li#envelope_notifications .dropdown-toggle{
+	display:none;
+}
+
+#search-box{
+	display:none !important;
+}
+
+
+
+li#envelope_messages .fa-envelope{
+	font-size:41px;
+}
+
+
+
+
+
+#adianti_right_panel .panel .panel-body{
+	text-align:center;
+	padding-top:8px;
+	padding-bottom:9px;
+}
+
+#adianti_right_panel .panel .panel-footer{
+	text-align:center;
+	background-color:#992162 !important;
+}
+
+.carrinho tr .tdatagrid_cell{
+	padding-top:6px !important;
+}
+
+.carrinho tr .tdatagrid_col{
+	padding-top:17px;
+}
+
+.carrinho tr .tdatagrid_cell{
+	border-top-style:solid !important;
+	border-color:#ccc1c1 !important;
+	border-bottom-style:solid !important;
+}
+
+li#support a{
+	display:none;
+}
+
+#search-box{
+	opacity:0;
+}
+
+
+
+
+
+
 
 
 

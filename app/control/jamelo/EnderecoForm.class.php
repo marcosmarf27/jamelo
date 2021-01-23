@@ -72,6 +72,9 @@ class EnderecoForm extends TPage
         $estado_id   = new THidden('estado_id');
         $obs   = new TText('obs');
 
+        $numero->setMask('99999');
+        $obs->placeholder ='Ajude-nos a chegar até seu endereço e indique um ponto de referência...';
+
        
       
         
@@ -82,7 +85,7 @@ class EnderecoForm extends TPage
       
         $this->form->addFields( [new TLabel('Complemento')],  [$complemento] );
         $this->form->addFields( [new TLabel('Cidade')],  [$cidade] );
-        $this->form->addFields([new TLabel('Observações/Ponto de referência')], [$obs] );
+        $this->form->addFields([new TLabel('Ponto de referência')], [$obs] );
      
         $this->form->addFields([$lat] );
         $this->form->addFields([$lon] );

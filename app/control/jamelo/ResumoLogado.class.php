@@ -182,6 +182,8 @@ class ResumoLogado extends TPage
        
         
         $formapagamento    = new TDBRadioGroup('pagamento', 'jamelo', 'Pagamento', 'id', 'nome');
+        $formapagamento->setLayout('horizontal');
+        $formapagamento->setUseButton();
         $obs   = new TText('obs');
         $obs->setSize('100%', 100);
         $obs->placeholder = 'Digite aqui ajustes que deseja fazer no seu pedido Ex. Não colocar cebola....';
@@ -373,7 +375,7 @@ class ResumoLogado extends TPage
          
 
         }
-        if ($param['pagamento'] == '4')
+        if ($param['pagamento'] == '4' or $param['pagamento'] == '5')
         {
            
             TQuickForm::showField('input_form_resumo', 'jamelo');

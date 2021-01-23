@@ -1,13 +1,13 @@
 <menu>
-    <menuitem label='Cardápio online'>
-    <icon>fas:book-open fa-fw</icon>
+    <menuitem label='Menu'>
+    <icon>fas:list white fa-fw</icon>
         <menu>
             <menuitem label='Hamburgueres'>
                 <icon>fas:hamburger</icon>
                 <action>PublicView</action>
             </menuitem>
             <menuitem label='Bebidas'>
-                <icon>fas:cocktail</icon>
+                <icon>fas:list</icon>
                 <action>PublicView</action>
                
             </menuitem>
@@ -43,6 +43,22 @@
                 <icon>fa:eraser fa-fw</icon>
                 <action>SystemRequestPasswordResetForm</action>
             </menuitem>
+        </menu>
+    </menuitem>
+
+     <menuitem label='Cardápio online'>
+    <icon>fas:book-open fa-fw</icon>
+        <menu>
+            <menuitem label='Hamburgueres'>
+                <icon>fas:hamburger</icon>
+                <action>PublicView</action>
+            </menuitem>
+            <menuitem label='Bebidas'>
+                <icon>fas:cocktail</icon>
+                <action>PublicView</action>
+               
+            </menuitem>
+            
         </menu>
     </menuitem>
 </menu>

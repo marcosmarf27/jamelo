@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu>
-  <menuitem label="Cardápio">
+  <menuitem label="MENU">
     <action>OfertaList</action>
-    <icon>fas:book-open fa-fw</icon>
+    <icon>fas:list white fa-fw</icon>
+  </menuitem>
+   <menuitem label="Cardápio">
+    <action>OfertaList</action>
+    <icon>fas:book  fa-fw</icon>
   </menuitem>
   <menuitem label="Carrinho">
     <action>Carrinho</action>
