@@ -46,6 +46,7 @@ class Resumo extends TPage
         
         $this->datagrid = new BootstrapDatagridWrapper(new TDataGrid);
         $this->datagrid->width = '100%';
+        $this->datagrid->disableDefaultClick();
         $preco = new TDataGridColumn('sale_price', 'Preço', 'right',   '20%');
         $qtd = new TDataGridColumn('amount', 'Qtd', 'right',   '30%');
         // add the columns

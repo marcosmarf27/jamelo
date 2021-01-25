@@ -95,6 +95,7 @@ class PedidoListCliente extends TPage
         $this->datagrid = new BootstrapDatagridWrapper(new TDataGrid);
         $this->datagrid->width = '100%';
         $this->datagrid->datatable = 'true';
+        $this->datagrid->disableDefaultClick();
         
         // creates the datagrid columns
         $column_id       = new TDataGridColumn('id', 'Pedido', 'center', '10%');
