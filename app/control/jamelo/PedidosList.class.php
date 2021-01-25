@@ -223,10 +223,10 @@ class PedidosList extends TPage
        // $column_date->setAction(new TAction([$this, 'onReload']), ['order' => 'data_pedido']);
         
         // define the transformer method over date
-        $column_date->setTransformer( function($value, $object, $row) {
+       /*  $column_date->setTransformer( function($value, $object, $row) {
             $date = new DateTime($value);
             return $date->format('H:i:s');
-        });
+        }); */
         $column_troco->setTransformer($format_value);
         $column_desconto->setTransformer($format_value);
         $column_valorpedido->setTransformer($format_value);
