@@ -191,7 +191,7 @@ class Resumo extends TPage
         $troco->setNumericMask(2, '.', ',', TRUE);
         //$troco->setTip('Informe o troco para quanto');
         $troco->placeholder = 'Informe o troco...';
-        $troco->setValue(0);
+       // $troco->setValue(0);
 
         $formapagamento->setChangeAction(new TAction(array(__CLASS__, 'onChangeType')));
         self::onChangeType( ['pagamento' => '1'] );
@@ -278,7 +278,13 @@ class Resumo extends TPage
         $pedido->total = $total;
         $pedido->pontovalor = 0;
         $pedido->valorcomdesc = $total;
-        $pedido->troco = abs($opcoes->troco -  $pedido->valorcomdesc);
+
+        if($opcoes->troco > 0){
+            $pedido->troco = abs($opcoes->troco -  $pedido->valorcomdesc);
+        }else{
+            $pedido->troco = 0;
+        }
+    
     
         $pedido->store();
        /*  if ($opcoes->pagamento != '4'){
