@@ -59,7 +59,7 @@ class LocalidadeForm extends TPage
         
         // add the columns
         $col_id    = new TDataGridColumn('id', 'Id', 'right', '10%');
-        $col_name  = new TDataGridColumn('Nome', 'Name', 'left', '90%');
+        $col_name  = new TDataGridColumn('nome', 'Name', 'left', '90%');
         
         $this->datagrid->addColumn($col_id);
         $this->datagrid->addColumn($col_name);
