@@ -114,7 +114,7 @@ class PedidosList extends TPage
         $column_fase    = new TDataGridColumn('fase', 'Fase', 'right', '15%');
       //  $column_valorpedido = new TDataGridColumn('total', 'Valor', 'left', '10%');
         $column_valorpedido = new TDataGridColumn('valorcomdesc', 'Valor', 'left', '10%');
-        $column_troco = new TDataGridColumn('troco', 'Troco', 'left', '10%');
+        $column_troco = new TDataGridColumn( '={troco} - 2', 'Troco', 'left', '10%');
         $column_desconto = new TDataGridColumn('pontovalor', 'Desconto', 'left', '10%');
         $column_entrega = new TDataGridColumn('entrega', 'Tx . entrega', 'left', '10%');
         $column_subtotal = new TDataGridColumn( '={valorcomdesc} + {entrega}', 'Total', 'left', '10%');
@@ -265,6 +265,8 @@ class PedidosList extends TPage
             return $date->format('H:i:s');
         }); */
         $column_troco->setTransformer($format_value);
+        $column_entrega->setTransformer($format_value);
+        $column_subtotal->setTransformer($format_value);
         $column_desconto->setTransformer($format_value);
         $column_valorpedido->setTransformer($format_value);
         $column_valorr->setTransformer($format_value);
