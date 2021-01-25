@@ -17,6 +17,8 @@ use Adianti\Widget\Datagrid\TDataGridAction;
 use Adianti\Widget\Datagrid\TDataGridColumn;
 use Adianti\Widget\Datagrid\TPageNavigation;
 use Adianti\Wrapper\BootstrapDatagridWrapper;
+use Linfo\Extension\Transmission;
+
 /**
  * SaleList
  *
@@ -32,6 +34,7 @@ class PedidosList extends TPage
     protected $form;     // registration form
     protected $datagrid; // listing
     protected $pageNavigation;
+    protected $detail_list;
     
     use Adianti\Base\AdiantiStandardListTrait;
     
@@ -96,20 +99,21 @@ class PedidosList extends TPage
         // creates a DataGrid
         $this->datagrid = new BootstrapDatagridWrapper(new TDataGrid);
         $this->datagrid->width = '100%';
-        $this->datagrid->datatable = 'true';
+       // $this->datagrid->datatable = 'true';
         
         // creates the datagrid columns
         $column_id       = new TDataGridColumn('id', 'Nº', 'center', '5%');
         $column_date     = new TDataGridColumn('data_pedido', 'Horário', 'center', '5%');
-        $column_customer = new TDataGridColumn('cliente->name', 'Cliente', 'left', '5%');
-        $column_fase    = new TDataGridColumn('fase', 'Fase', 'right', '40%');
-        $column_valorpedido = new TDataGridColumn('valorcomdesc', 'Valor', 'left', '5%');
+        $column_customer = new TDataGridColumn('cliente->name', 'Cliente', 'left', '10%');
+        $column_fase    = new TDataGridColumn('fase', 'Fase', 'right', '15%');
+       // $column_valorpedido = new TDataGridColumn('valorcomdesc', 'Valor', 'left', '5%');
         $column_troco = new TDataGridColumn('troco', 'Troco', 'left', '5%');
-        $column_endereco = new TDataGridColumn('cliente->endereco->rua', 'Rua', 'left', '5%');
+        $column_endereco = new TDataGridColumn('cliente->endereco->rua', 'Rua', 'left', '10%');
+        $column_localidade = new TDataGridColumn('cliente->endereco->localidade->nome', 'Local', 'left', '10%');
         $column_numero = new TDataGridColumn('cliente->endereco->numero', 'Número', 'left', '5%');
         $column_bairro = new TDataGridColumn('cliente->endereco->bairro', 'Bairro', 'left', '5%');
-        $column_obs = new TDataGridColumn('cliente->endereco->obs', 'Ponto de Referência', 'left', '5%');
-        $column_obspedido = new TDataGridColumn('obs', 'Ajustes Pedido', 'left', '5%');
+        $column_obs = new TDataGridColumn('cliente->endereco->obs', 'Referência', 'left', '10%');
+        $column_obspedido = new TDataGridColumn('obs', 'Ajustes', 'left', '10%');
        //$column_valorr = new TDataGridColumn('total', 'Valor', 'left', '15%');
        // $column_status    = new TDataGridColumn('status', 'Pago?', 'right', '15%');
       
@@ -137,8 +141,9 @@ class PedidosList extends TPage
       
         $this->datagrid->addColumn($column_fase);
         $this->datagrid->addColumn($column_date);
-        $this->datagrid->addColumn($column_valorpedido);
+       //$this->datagrid->addColumn($column_valorpedido);
         $this->datagrid->addColumn($column_troco);
+        $this->datagrid->addColumn($column_localidade);
         $this->datagrid->addColumn($column_endereco);
         $this->datagrid->addColumn($column_numero);
         $this->datagrid->addColumn($column_bairro);
@@ -223,11 +228,14 @@ class PedidosList extends TPage
             $date = new DateTime($value);
             return $date->format('H:i:s');
         });
+        $column_troco->setTransformer($format_value);
 
         //$action_view   = new TDataGridAction(['SaleSidePanelView', 'onView'],   ['key' => '{id}', 'register_state' => 'false'] );
         //$action_edit   = new TDataGridAction(['PedidoForm', 'onEdit'],   ['key' => '{id}'] );
       //  $action_cozinha   = new TDataGridAction(['CozinhaList', 'onReload'],  ['key' => '{id}']);
         $action_confirm   = new TDataGridAction([$this, 'confirmarPedido'],   ['key' => '{id}'] );
+        $action_detailes = new TDataGridAction(array($this, 'onShowDetail'), ['id' => '{id}'] );
+      
         $action_entregar   = new TDataGridAction([$this, 'entregarPedido'],   ['key' => '{id}'] );
         $action_concluir   = new TDataGridAction([$this, 'concluirPedido'],   ['key' => '{id}', 'cliente' => '{system_user_id}'] );
 
@@ -237,9 +245,10 @@ class PedidosList extends TPage
         //$action_endereco   = new TDataGridAction(['EnderecoFormWindow', 'loadPage'],   ['system_user_id' => '{system_user_id}'] );
         //$action_delete = new TDataGridAction([$this, 'onDelete'],   ['key' => '{id}'] );
         //$this->datagrid->addAction($action_cozinha, 'Ver itens na cozinha...', 'fas:list fa-fw');
+        $this->datagrid->addAction($action_detailes, 'View', 'fa:search #000000');
         $this->datagrid->addAction($action_confirm, 'Confirmar pedido e enviar para cozinha', 'fas:check green fa-fw');
         $this->datagrid->addAction($action_entregar, 'Pedido pronto, enviar para entrega', 'fas:motorcycle fa-fw');
-        $this->datagrid->addAction($action_concluir, 'Confirmar entrega e concluir pedido', 'fas:cash-register blue fa-fw');
+        $this->datagrid->addAction($action_concluir, 'Confirmar entrega e concluir pedido', 'fas:cash-register black  fa-fw');
       
       
       /*   $this->datagrid->addAction($action_edit, 'Edit',   'far:edit blue fa-fw');
@@ -481,4 +490,51 @@ class PedidosList extends TPage
             new TMessage('error', $e->getMessage());
         }
     }
+
+    public function onShowDetail( $param )
+    {
+        // get row position
+        TTransaction::open('jamelo');
+        $this->detail_list = new BootstrapDatagridWrapper( new TDataGrid );
+        $this->detail_list->style = 'width:100%';
+        $this->detail_list->disableDefaultClick();
+        
+        $product       = new TDataGridColumn('item->nome',  'Item', 'left');
+        $price         = new TDataGridColumn('preco',  'Preço',    'right');
+        $amount        = new TDataGridColumn('qtd',  'Qtd',    'center');
+        $subtotal      = new TDataGridColumn('subtotal',  'Subtotal',    'right');
+        //$total         = new TDataGridColumn('total',  'Total',    'right');
+        
+        $this->detail_list->addColumn( $product );
+        $this->detail_list->addColumn( $price );
+        $this->detail_list->addColumn( $amount );
+       // $this->detail_list->addColumn( $discount );
+        $this->detail_list->addColumn( $subtotal );
+
+        $this->detail_list->createModel();
+        
+        $items = PedidoItem::where('pedido_id', '=', $param['key'])->load();
+        $this->detail_list->addItems($items);
+        
+        
+        $pos = $this->datagrid->getRowIndex('id', $param['key']);
+        
+        // get row by position
+        $current_row = $this->datagrid->getRow($pos);
+        $current_row->style = "background-color: #8D8BC8; color:white; text-shadow:none";
+        
+        // create a new row
+        $row = new TTableRow;
+        $row->style = "background-color: #E0DEF8";
+        $row->addCell('');
+        $cell = $row->addCell($this->detail_list);
+        $cell->colspan =14;
+        $cell->style='padding:10px;';
+        
+        // insert the new row
+        $this->datagrid->insert($pos +1, $row);
+
+        TTransaction::close();
+    }
+    
 }

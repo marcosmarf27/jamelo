@@ -14,6 +14,8 @@ class Endereco extends TRecord
     const TABLENAME = 'endereco';
     const PRIMARYKEY= 'id';
     const IDPOLICY =  'max'; // {max, serial}
+
+    private $localidade;
     
     
     /**
@@ -35,4 +37,17 @@ class Endereco extends TRecord
         parent::addAttribute('tipo');
         parent::addAttribute('localidade_id');
     }
+
+    function get_localidade()
+    {
+        // instantiates City, load $this->city_id
+        if (empty($this->localidade))
+        {
+            $this->localidade = new Localidade($this->localidade_id);
+        }
+        
+        // returns the City Active Record
+        return $this->localidade;
+    }
+  
 }
