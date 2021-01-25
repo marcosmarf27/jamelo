@@ -190,6 +190,10 @@ class ResumoLogado extends TPage
         $troco = new TEntry('troco');
         $jamelo = new TEntry('jamelo');
         $jamelo->setTip('Seus Jamelos acumulados');
+        $entrega =  new TRadioGroup('entrega');
+        $entrega->addItems(array('1' => 'Receber em casa', '2' => 'Eu vou buscar'));
+        $entrega->setUseButton();
+        $entrega->setLayout('horizontal');
         $info = new TText('info');
         $info->setValue('Ao usar seus jamelos como forma de pagamento o sistema irá fazer desconto automaticamente!');
         $info->setSize('100%', 60);
@@ -215,6 +219,7 @@ class ResumoLogado extends TPage
         $form->addFields( [new TLabel('<i class="fas fa-info"></i>')], [$info]);
         $form->addFields( [new TLabel('<i class="fas fa-user-edit"></i>')], [$obs]);
         $form->addFields( [new TLabel('<i class="fas fa-exchange-alt"></i>')], [$troco]);
+        $form->addFields( [new TLabel('<i class="fas fa-motorcycle"></i>')], [$entrega]);
 
         $jamelo->setEditable(false);
         $info->setEditable(false);
@@ -246,6 +251,15 @@ class ResumoLogado extends TPage
         $pedido->obs = $opcoes->obs;
         $pedido->status = 1 ;
         $pedido->fase = 1 ;
+
+        
+        if($opcoes->entrega == '1'){
+            $pedido->entrega = 2.0;
+            $pedido->store();
+        }else{
+            $pedido->entrega = 0;
+            $pedido->store();
+        }
         $pedido->store();
         //gera os itens
         $itens = array();

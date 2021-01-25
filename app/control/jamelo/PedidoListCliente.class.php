@@ -104,9 +104,12 @@ class PedidoListCliente extends TPage
         $column_id       = new TDataGridColumn('id', 'Pedido', 'center', '10%');
         $column_date     = new TDataGridColumn('data_pedido', 'Horário', 'center', '15%');
       
-        $column_valorr = new TDataGridColumn('total', 'Valor Original', 'left', '15%');
+        $column_valorr = new TDataGridColumn('total', 'Valor', 'left', '15%');
         $column_desconto = new TDataGridColumn('pontovalor', 'Desconto', 'left', '15%');
         $column_subtotal = new TDataGridColumn('valorcomdesc', 'Valor final', 'left', '15%');
+        $column_entrega = new TDataGridColumn('entrega', 'Tx entrega', 'left', '15%');
+        $column_subtotal = new TDataGridColumn( '={valorcomdesc} + {entrega}', 'Tx entrega', 'left', '15%');
+       
       
         $column_fase    = new TDataGridColumn('fase', 'Fase Atual', 'right', '30%');
         $column_valorr->setDataProperty('style','font-weight:  bold');
@@ -136,6 +139,8 @@ class PedidoListCliente extends TPage
         //$this->datagrid->addColumn($column_total);
         $this->datagrid->addColumn($column_valorr);
         $this->datagrid->addColumn($column_desconto);
+      
+        $this->datagrid->addColumn($column_entrega);
         $this->datagrid->addColumn($column_subtotal);
        
         $this->datagrid->addColumn($column_fase);
@@ -220,6 +225,7 @@ class PedidoListCliente extends TPage
        $column_valorr->setTransformer($format_value);
        $column_desconto->setTransformer($format_value);
        $column_subtotal->setTransformer($format_value);
+       $column_entrega->setTransformer($format_value);
         
         // creates the datagrid column actions
         $column_id->setAction(new TAction([$this, 'onReload']),   ['order' => 'id']);
