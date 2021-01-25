@@ -231,6 +231,13 @@ class PedidosList extends TPage
         $column_desconto->setTransformer($format_value);
         $column_valorpedido->setTransformer($format_value);
         $column_valorr->setTransformer($format_value);
+        $obs->setTransformer( function($value, $object, $row) {
+            $div = new TElement('span');
+            $div->class="label label-danger";
+            $div->style="text-shadow:none; font-size:18px";
+            $div->add($value);
+            return $div;
+        });
 
         //$action_view   = new TDataGridAction(['SaleSidePanelView', 'onView'],   ['key' => '{id}', 'register_state' => 'false'] );
         //$action_edit   = new TDataGridAction(['PedidoForm', 'onEdit'],   ['key' => '{id}'] );
