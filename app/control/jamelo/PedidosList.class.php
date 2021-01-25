@@ -235,6 +235,16 @@ class PedidosList extends TPage
              });
 
        //$column_valorr->setTransformer($format_value);
+
+       $column_telefone->setTransformer( function ($value) {
+        if ($value)
+        {
+            $value = str_replace([' ','-','(',')'],['','','',''], $value);
+            $icon  = "<i class='fab fa-whatsapp' aria-hidden='true'></i>";
+            return "{$icon} <a target='newwindow' href='https://api.whatsapp.com/send?phone=55{$value}&text=Olá'> {$value} </a>";
+        }
+        return $value;
+    });
         
         // creates the datagrid column actions
         $column_id->setAction(new TAction([$this, 'onReload']),   ['order' => 'id']);
