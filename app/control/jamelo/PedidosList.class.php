@@ -530,10 +530,10 @@ class PedidosList extends TPage
         //$total         = new TDataGridColumn('total',  'Total',    'right');
         
         $this->detail_list->addColumn( $product );
-        $this->detail_list->addColumn( $price );
+        //$this->detail_list->addColumn( $price );
         $this->detail_list->addColumn( $amount );
        // $this->detail_list->addColumn( $discount );
-        $this->detail_list->addColumn( $subtotal );
+       // $this->detail_list->addColumn( $subtotal );
 
         $subtotal->enableTotal('sum', 'R$', 2, ',', '.');
 
@@ -584,7 +584,7 @@ class PedidosList extends TPage
         $items = Endereco::where('system_user_id', '=', $param['system_user_id'])->load();
         $this->endereco->addItems($items);
 
-        $panel = new TPanelGroup('Detalhes do pedido');
+        $panel = new TPanelGroup();
         $panel->add($this->detail_list);
         $panel->add($this->endereco);
         //$panel->addFooter('footer');
