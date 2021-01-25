@@ -116,7 +116,7 @@ class PedidosList extends TPage
        // $column_status    = new TDataGridColumn('status', 'Pago?', 'right', '15%');
       
         $column_customer->setDataProperty('style','font-weight: bold');
-        $column_obspedido->setDataProperty('style','font-weight: 16px bold');
+        $column_obspedido->setDataProperty('style','font-weight: bold');
       
         
         // define format function
@@ -141,8 +141,9 @@ class PedidosList extends TPage
         $this->datagrid->addColumn($column_fase);
         $this->datagrid->addColumn($column_date);
         $this->datagrid->addColumn($column_valorr);
+        $this->datagrid->addColumn($column_desconto);
        $this->datagrid->addColumn($column_valorpedido);
-       $this->datagrid->addColumn($column_desconto);
+    
         $this->datagrid->addColumn($column_troco);
         //$this->datagrid->addColumn($column_localidade);
 
