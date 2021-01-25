@@ -583,7 +583,7 @@ class PedidosList extends TPage
         
         // create a new row
         $row = new TTableRow;
-        $row->style = "background-color: #E0DEF8";
+        $row->style = "background-color: blue";
         $row->addCell('');
         $cell = $row->addCell($panel);
         $cell->colspan =14;
