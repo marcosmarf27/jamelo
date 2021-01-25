@@ -33,5 +33,6 @@ class Endereco extends TRecord
         parent::addAttribute('complemento');
         parent::addAttribute('system_user_id');
         parent::addAttribute('tipo');
+        parent::addAttribute('localidade_id');
     }
 }
