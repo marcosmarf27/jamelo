@@ -138,11 +138,12 @@ class PedidosList extends TPage
        // $this->datagrid->addColumn($column_status);
        // $this->datagrid->addColumn($column_valorr);
         $this->datagrid->addColumn($column_customer);
+        $this->datagrid->addColumn($column_telefone);
       
         $this->datagrid->addColumn($column_fase);
-       // $this->datagrid->addColumn($column_date);
-        $this->datagrid->addColumn($column_valorr);
-        $this->datagrid->addColumn($column_desconto);
+      
+       // $this->datagrid->addColumn($column_valorr);
+        //$this->datagrid->addColumn($column_desconto);
        $this->datagrid->addColumn($column_valorpedido);
     
         $this->datagrid->addColumn($column_troco);
