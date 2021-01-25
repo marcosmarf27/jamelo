@@ -515,7 +515,16 @@ class PedidosList extends TPage
 
         $subtotal->enableTotal('sum', 'R$', 2, ',', '.');
 
+        $amount->setTransformer( function($value, $object, $row) {
+            $div = new TElement('span');
+            $div->class="label label-info";
+            $div->style="text-shadow:none; font-size:15px";
+            $div->add($value);
+            return $div;
+        });
+
         $this->detail_list->createModel();
+
 
         $items = PedidoItem::where('pedido_id', '=', $param['key'])->load();
         $this->detail_list->addItems($items);
