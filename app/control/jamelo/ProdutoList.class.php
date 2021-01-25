@@ -44,7 +44,7 @@ class ProdutoList extends TPage
         $this->setDatabase('jamelo');                // defines the database
         $this->setActiveRecord('Produto');            // defines the active record
         $this->setDefaultOrder('id', 'asc');          // defines the default order
-        $this->addFilterField('descricao', 'ilike'); // add a filter field
+        $this->addFilterField('nome', 'ilike'); // add a filter field
                 // add a filter field
         
         // creates the form
@@ -52,13 +52,13 @@ class ProdutoList extends TPage
         $this->form->setFormTitle('Lista de produtos');
         
         // create the form fields
-        $description = new TEntry('descricao');
+        $description = new TEntry('nome');
        
        
         
         // add a row for the filter field
       
-        $this->form->addFields( [new TLabel('Descrição')], [$description] );
+        $this->form->addFields( [new TLabel('Nome')], [$description] );
         
         $this->form->setData( TSession::getValue('ProdutoList_filter_data') );
         
@@ -74,7 +74,7 @@ class ProdutoList extends TPage
 
         // creates the datagrid columns
         $col_id          = new TDataGridColumn('id', 'ID', 'center', '20%');
-        $col_description = new TDataGridColumn('descricao', 'Descrição', 'left', '35%');
+        $col_description = new TDataGridColumn('nome', 'Descrição', 'left', '35%');
        
         $col_sale_price  = new TDataGridColumn('preco', 'Preço', 'right', '45%');
       
@@ -94,6 +94,15 @@ class ProdutoList extends TPage
         // add the actions to the datagrid
         $this->datagrid->addAction($action1, 'Edit', 'far:edit blue');
         $this->datagrid->addAction($action2 ,'Delete', 'far:trash-alt red');
+
+        $format_value = function($value) {
+            if (is_numeric($value)) {
+                return 'R$ '.number_format($value, 2, ',', '.');
+            }
+            return $value;
+        };
+
+        $col_sale_price->setTransformer($format_value);
         
         // create the datagrid model
         $this->datagrid->createModel();
