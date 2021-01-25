@@ -42,6 +42,7 @@ class OfertaList extends TPage
         $this->setDatabase('jamelo');
         $this->setActiveRecord('Produto');
         $this->addFilterField('descricao', 'ilike', 'descricao');
+        $this->setLimit('20');
 
         TTransaction::open('jamelo');
         $preferencias = SystemPreference::getAllPreferences();

@@ -50,7 +50,7 @@ class Resumo extends TPage
         $qtd = new TDataGridColumn('amount', 'Qtd', 'right',   '30%');
         // add the columns
         //$this->datagrid->addColumn( new TDataGridColumn('id',  'ID',  'center', '10%') );
-        $this->datagrid->addColumn( new TDataGridColumn('description',  'Descrição',  'left',   '50%') );
+        $this->datagrid->addColumn( new TDataGridColumn('nome',  'Descrição',  'left',   '50%') );
         $this->datagrid->addColumn( $qtd );
         $this->datagrid->addColumn($preco);
 
