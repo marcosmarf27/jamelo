@@ -84,7 +84,7 @@ class EnderecoForm extends TPage
         $this->form->addFields( [new TLabel('Bairro')],  [$bairro], [new TLabel('Número')],  [$numero] );
       
         $this->form->addFields( [new TLabel('Complemento')],  [$complemento] );
-        $this->form->addFields( [new TLabel('Cidade')],  [$cidade] );
+        $this->form->addFields( [new TLabel('Área de atendimento')],  [$cidade] );
         $this->form->addFields([new TLabel('Ponto de referência')], [$obs] );
      
         $this->form->addFields([$lat] );
