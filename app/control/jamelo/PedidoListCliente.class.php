@@ -216,6 +216,7 @@ class PedidoListCliente extends TPage
 
         //$action_view   = new TDataGridAction(['SaleSidePanelView', 'onView'],   ['key' => '{id}', 'register_state' => 'false'] );
         $action_edit   = new TDataGridAction(['PedidoForm', 'onEdit'],   ['key' => '{id}'] );
+        $action_cancelar   = new TDataGridAction([$this, 'cancelarPedido'],   ['key' => '{id}'] );
         $action_confirm   = new TDataGridAction([$this, 'confirmarPedido'],   ['key' => '{id}'] );
         $action_entregar   = new TDataGridAction([$this, 'entregarPedido'],   ['key' => '{id}'] );
         $action_endereco   = new TDataGridAction(['EnderecoFormWindow', 'loadPage'],   ['system_user_id' => '{system_user_id}'] );
@@ -224,7 +225,7 @@ class PedidoListCliente extends TPage
        // $this->datagrid->addAction($action_view, _t('View details'), 'fa:search green fa-fw');
       /*   $this->datagrid->addAction($action_edit, 'Edit',   'far:edit blue fa-fw');
         $this->datagrid->addAction($action_delete, 'Delete', 'far:trash-alt red fa-fw'); */
-
+        $this->datagrid->addAction($action_cancelar, 'Cancelar', 'far:trash-alt red fa-fw');
         $action_edit->setLabel('Editar pedido');
         $action_edit->setImage('far:edit blue fa-fw');
 
@@ -344,6 +345,43 @@ class PedidoListCliente extends TPage
 
         $action = new TAction(array('PedidosList', 'onReload'));
         new TMessage('info', 'Pedido confirmado com sucesso!', $action);
+
+        TTransaction::close();
+
+
+        
+    }
+
+    public function cancelarPedido($param){
+
+        TTransaction::open('jamelo');
+
+        $pedido = new Pedido($param['key']);
+
+        if ($pedido->fase == '1'){
+
+            $pedido->fase = 5;
+            $pedido->store();
+    
+            $msg = new SystemMessage();
+            $msg->system_user_id = 1; //admnistrador que envia mensagem
+            $msg->system_user_to_id = $pedido->system_user_id;
+            $msg->subject = 'Pedido cancelado com sucesso!';
+            $msg->message = '<p>Prezado Cliente,</p><p>Seu pedido foi cancelado com <b>sucesso </b>e já estamos preparando!</p><p><br></p><p>Atenciosamente,&nbsp;</p><p>Jamelo</p>';
+            $msg->dt_message = date('Y-m-d H:i:s');
+            $msg->checked = 'N';
+            $msg->store();
+    
+            $action = new TAction(array('PedidoListCliente', 'onReload'));
+            new TMessage('info', 'Pedido Cancelado com sucesso!', $action);
+
+
+        }else{
+
+            new TMessage('error', 'Para cancelar pedidos já confirmados entre em contato pelo nosso whatsapp!');
+
+        }
+   
 
         TTransaction::close();
 
