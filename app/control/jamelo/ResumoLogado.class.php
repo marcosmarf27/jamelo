@@ -16,6 +16,7 @@ use Adianti\Wrapper\BootstrapFormBuilder;
 use Adianti\Widget\Datagrid\TDataGridAction;
 use Adianti\Widget\Datagrid\TDataGridColumn;
 use Adianti\Widget\Dialog\TMessage;
+use Adianti\Widget\Form\TCombo;
 use Adianti\Widget\Form\TText;
 use Adianti\Wrapper\BootstrapDatagridWrapper;
 
@@ -187,7 +188,8 @@ class ResumoLogado extends TPage
         
         $form = new BootstrapFormBuilder('input_form_resumo');
         
-        $troco = new TEntry('troco');
+        $troco = new TCombo('troco');
+        $troco->addItems(array('20' => 'R$ 20', '50' => 'R$ 50', '100' => 'R$ 100' ));
         $jamelo = new TEntry('jamelo');
         $taxa = new TEntry('taxa');
         $taxa->setNumericMask(2, '.', ',', true);
@@ -208,9 +210,9 @@ class ResumoLogado extends TPage
         $obs   = new TText('obs');
         $obs->setSize('100%', 100);
         $obs->placeholder = 'Digite aqui ajustes que deseja fazer no seu pedido Ex. Não colocar cebola....';
-        $troco->setNumericMask(2, '.', ',', TRUE);
+       // $troco->setNumericMask(2, '.', ',', TRUE);
         //$troco->setTip('Informe o troco para quanto');
-        $troco->placeholder = 'Informe o troco...';
+       // $troco->placeholder = 'Informe o troco...';
 
         $formapagamento->setChangeAction(new TAction(array(__CLASS__, 'onChangeType')));
         self::onChangeType( ['pagamento' => '1'] );
