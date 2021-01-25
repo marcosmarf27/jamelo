@@ -396,7 +396,7 @@ class PedidoListCliente extends TPage
 
         }else{
 
-            new TMessage('error', 'Para cancelar pedidos já confirmados entre em contato pelo nosso whatsapp!');
+            new TMessage('error', 'Seu já pedido já foi confirmado/em prepraro ou já está cancelado, se precisar de ajuda entre contato no nosso whatsapp !');
 
         }
    
