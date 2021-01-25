@@ -523,6 +523,14 @@ class PedidosList extends TPage
             return $div;
         });
 
+        $product->setTransformer( function($value, $object, $row) {
+            return "<span id = 'cozinhaitem'  style='color:white; font-size: 25px; background: {$object->item->cor}'>$value</span>";
+        });
+
+
+    
+       
+
         $this->detail_list->createModel();
 
 
