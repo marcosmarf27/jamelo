@@ -35,6 +35,7 @@ class PedidosList extends TPage
     protected $datagrid; // listing
     protected $pageNavigation;
     protected $detail_list;
+    protected $endereco;
     
     use Adianti\Base\AdiantiStandardListTrait;
     
@@ -234,7 +235,7 @@ class PedidosList extends TPage
         //$action_edit   = new TDataGridAction(['PedidoForm', 'onEdit'],   ['key' => '{id}'] );
       //  $action_cozinha   = new TDataGridAction(['CozinhaList', 'onReload'],  ['key' => '{id}']);
         $action_confirm   = new TDataGridAction([$this, 'confirmarPedido'],   ['key' => '{id}'] );
-        $action_detailes = new TDataGridAction(array($this, 'onShowDetail'), ['id' => '{id}'] );
+        $action_detailes = new TDataGridAction(array($this, 'onShowDetail'), ['id' => '{id}', 'system_user_id' => '{system_user_id}'] );
       
         $action_entregar   = new TDataGridAction([$this, 'entregarPedido'],   ['key' => '{id}'] );
         $action_concluir   = new TDataGridAction([$this, 'concluirPedido'],   ['key' => '{id}', 'cliente' => '{system_user_id}'] );
@@ -512,9 +513,37 @@ class PedidosList extends TPage
         $this->detail_list->addColumn( $subtotal );
 
         $this->detail_list->createModel();
-        
+
         $items = PedidoItem::where('pedido_id', '=', $param['key'])->load();
-        $this->detail_list->addItems($items);
+        $this->endereco->addItems($items);
+
+
+       
+        $this->endereco = new BootstrapDatagridWrapper( new TDataGrid );
+        $this->endereco->style = 'width:100%';
+        $this->endereco->disableDefaultClick();
+        
+        $rua       = new TDataGridColumn('rua',  'Rua', 'left');
+        $numero         = new TDataGridColumn('numero',  'Nº',    'right');
+        $bairro        = new TDataGridColumn('bairro',  'Bairro',    'center');
+        $obs      = new TDataGridColumn('obs',  'Ponto de Ref.',    'right');
+        //$total         = new TDataGridColumn('total',  'Total',    'right');
+        
+        $this->endereco->addColumn( $rua );
+        $this->endereco->addColumn( $numero );
+        $this->endereco->addColumn( $bairro );
+       // $this->detail_list->addColumn( $discount );
+        $this->endereco->addColumn( $obs );
+
+        $this->endereco->createModel();
+        
+        $items = Endereco::where('system_user_id', '=', $param['system_user_id'])->load();
+        $this->endereco->addItems($items);
+
+        $panel = new TPanelGroup('Detalhes do pedido');
+        $panel->add($this->detail_list);
+        $panel->add($this->endereco);
+        //$panel->addFooter('footer');
         
         
         $pos = $this->datagrid->getRowIndex('id', $param['key']);
