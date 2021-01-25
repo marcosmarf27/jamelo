@@ -55,6 +55,8 @@ class PedidosList extends TPage
         $criteria->add(new TFilter('fase','!=', '4'), TExpression::OR_OPERATOR);
         $criteria->add(new TFilter('fase','!=', '5'), TExpression::OR_OPERATOR);
         $this->setCriteria($criteria);
+
+        
         //$this->addFilterField('fase', '=', 'fase'); // filterField, operator, formField
         
     /*     $this->addFilterField('data_pedido', '>=', 'date_from', function($value) {
