@@ -508,6 +508,8 @@ class PedidosList extends TPage
        // $this->detail_list->addColumn( $discount );
         $this->detail_list->addColumn( $subtotal );
 
+        $subtotal->enableTotal('sum', 'R$', 2, ',', '.');
+
         $this->detail_list->createModel();
 
         $items = PedidoItem::where('pedido_id', '=', $param['key'])->load();
