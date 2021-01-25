@@ -420,7 +420,7 @@ class SystemUser extends TRecord
         // instantiates City, load $this->city_id
         if (empty($this->endereco))
         {
-            $this->endereco = new Endereco($this->id);
+            $this->endereco = Endereco::where('system_user_id', '=', $this->id)->first();
         }
         
         // returns the City Active Record
