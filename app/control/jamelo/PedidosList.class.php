@@ -526,9 +526,9 @@ class PedidosList extends TPage
         $this->detail_list->style = 'width:100%';
         $this->detail_list->disableDefaultClick();
         
-        $product       = new TDataGridColumn('item->nome',  'Item', 'left');
+        $product       = new TDataGridColumn('item->nome',  'Item', 'left', '30%');
         $price         = new TDataGridColumn('preco',  'Preço',    'right');
-        $amount        = new TDataGridColumn('qtd',  'Qtd',    'center');
+        $amount        = new TDataGridColumn('qtd',  'Qtd',    'left', '30%');
         $subtotal      = new TDataGridColumn('subtotal',  'Subtotal',    'right');
         //$total         = new TDataGridColumn('total',  'Total',    'right');
         
