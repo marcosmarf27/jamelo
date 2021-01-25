@@ -126,7 +126,7 @@ class ResumoLogado extends TPage
                     
                     $item = new StdClass;
                     $item->id          = $product->id;
-                    $item->description = $product->descricao;
+                    $item->description = $product->nome;
                     $item->amount      = $amount;
                     $item->sale_price  = $amount * $product->preco;
                     
