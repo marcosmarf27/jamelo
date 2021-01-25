@@ -240,9 +240,7 @@ class PedidosList extends TPage
         $this->datagrid->addAction($action_confirm, 'Confirmar pedido e enviar para cozinha', 'fas:check green fa-fw');
         $this->datagrid->addAction($action_entregar, 'Pedido pronto, enviar para entrega', 'fas:motorcycle fa-fw');
         $this->datagrid->addAction($action_concluir, 'Confirmar entrega e concluir pedido', 'fas:cash-register blue fa-fw');
-        $action_confirm->setUseButton(TRUE);
-        $action_entregar->setUseButton(TRUE);
-        $action_concluir->setUseButton(TRUE);
+      
       
       /*   $this->datagrid->addAction($action_edit, 'Edit',   'far:edit blue fa-fw');
         $this->datagrid->addAction($action_delete, 'Delete', 'far:trash-alt red fa-fw'); */
