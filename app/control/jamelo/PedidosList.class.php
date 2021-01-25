@@ -231,7 +231,7 @@ class PedidosList extends TPage
         $column_desconto->setTransformer($format_value);
         $column_valorpedido->setTransformer($format_value);
         $column_valorr->setTransformer($format_value);
-        $obs->setTransformer( function($value, $object, $row) {
+        $column_obspedido->setTransformer( function($value, $object, $row) {
             $div = new TElement('span');
             $div->class="label label-danger";
             $div->style="text-shadow:none; font-size:18px";
