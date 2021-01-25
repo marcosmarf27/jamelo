@@ -140,7 +140,7 @@ class PedidosList extends TPage
         $this->datagrid->addColumn($column_date);
        //$this->datagrid->addColumn($column_valorpedido);
         $this->datagrid->addColumn($column_troco);
-        $this->datagrid->addColumn($column_localidade);
+        //$this->datagrid->addColumn($column_localidade);
 
         $this->datagrid->addColumn($column_obspedido);
         //$this->datagrid->addColumn($column_total);
