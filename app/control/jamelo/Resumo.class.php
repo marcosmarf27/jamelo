@@ -187,9 +187,11 @@ class Resumo extends TPage
         $formapagamento    = new TDBRadioGroup('pagamento', 'jamelo', 'Pagamento', 'id', 'nome', 'id', $filtro);
         $obs   = new TText('obs');
         $obs->placeholder = 'Digite aqui ajustes que deseja fazer no seu pedido Ex. Não colocar cebola....';
+        $obs->setValue('Digite aqui ajustes que deseja fazer no seu pedido Ex. Não colocar cebola....');
         $troco->setNumericMask(2, '.', ',', TRUE);
         //$troco->setTip('Informe o troco para quanto');
         $troco->placeholder = 'Informe o troco...';
+        $troco->setValue(0);
 
         $formapagamento->setChangeAction(new TAction(array(__CLASS__, 'onChangeType')));
         self::onChangeType( ['pagamento' => '1'] );
