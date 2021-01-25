@@ -199,7 +199,7 @@ class Resumo extends TPage
         self::onChangeType( ['pagamento' => '1'] );
         
         $entrega->setChangeAction(new TAction(array(__CLASS__, 'onChangeType2')));
-        self::onChangeType( ['taxa' => '1'] );
+        self::onChangeType( ['entrega' => '1'] );
        $entrega->setValue(1);
       
         
@@ -401,7 +401,7 @@ class Resumo extends TPage
 
     public static function onChangeType2($param)
     {
-        if ($param['taxa'] == '1')
+        if ($param['entrega'] == '1')
         {
            
             TQuickForm::showField('input_form_resumo', 'taxa');
