@@ -177,6 +177,7 @@ class Resumo extends TPage
         $troco = new TEntry('troco');
         $jamelo = new TEntry('jamelo');
         $taxa = new TEntry('taxa');
+        $taxa->setNumericMask(2, '.', ',', true);
         $taxa->setValue(2);
         $jamelo->setTip('Seus Jamelos acumulados');
         $entrega =  new TRadioGroup('entrega');
@@ -209,7 +210,7 @@ class Resumo extends TPage
         $form->addFields( [new TLabel('<i class="fas fa-user-edit"></i>')], [$obs]);
         $form->addFields( [new TLabel('<i class="fas fa-exchange-alt"></i>')], [$troco]);
         $form->addFields( [new TLabel('<i class="fas fa-motorcycle"></i>')], [$entrega]);
-        $form->addFields( [new TLabel('Taxa de entrega')], [$taxa]);
+        $form->addFields( [new TLabel('Taxa de entrega R$')], [$taxa]);
 
        
       
