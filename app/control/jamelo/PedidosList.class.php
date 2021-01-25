@@ -104,7 +104,7 @@ class PedidosList extends TPage
         
         // creates the datagrid columns
         $column_id       = new TDataGridColumn('id', 'Nº', 'center', '5%');
-        $column_date     = new TDataGridColumn('data_pedido', 'Horário', 'center', '10%');
+        //$column_date     = new TDataGridColumn('data_pedido', 'Horário', 'center', '10%');
         $column_customer = new TDataGridColumn('cliente->name', 'Cliente', 'left', '20%');
         $column_fase    = new TDataGridColumn('fase', 'Fase', 'right', '15%');
         $column_valorpedido = new TDataGridColumn('valorcomdesc', 'Valor', 'left', '10%');
@@ -112,7 +112,7 @@ class PedidosList extends TPage
         $column_desconto = new TDataGridColumn('pontovalor', 'Desconto', 'left', '10%');
       
         $column_obspedido = new TDataGridColumn('obs', 'Ajustes', 'left', '30%');
-       $column_valorr = new TDataGridColumn('total', 'Valor original', 'left', '15%');
+       $column_valorr = new TDataGridColumn('total', 'Valor original', 'left', '10%');
        // $column_status    = new TDataGridColumn('status', 'Pago?', 'right', '15%');
       
         $column_customer->setDataProperty('style','font-weight: bold');
@@ -139,7 +139,7 @@ class PedidosList extends TPage
         $this->datagrid->addColumn($column_customer);
       
         $this->datagrid->addColumn($column_fase);
-        $this->datagrid->addColumn($column_date);
+       // $this->datagrid->addColumn($column_date);
         $this->datagrid->addColumn($column_valorr);
         $this->datagrid->addColumn($column_desconto);
        $this->datagrid->addColumn($column_valorpedido);
