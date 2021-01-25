@@ -380,7 +380,7 @@ class PedidoListCliente extends TPage
             $msg->system_user_id = 1; //admnistrador que envia mensagem
             $msg->system_user_to_id = $pedido->system_user_id;
             $msg->subject = 'Pedido cancelado com sucesso!';
-            $msg->message = '<p>Prezado Cliente,</p><p>Seu pedido foi cancelado com <b>sucesso </b>e já estamos preparando!</p><p><br></p><p>Atenciosamente,&nbsp;</p><p>Jamelo</p>';
+            $msg->message = '<p>Prezado Cliente,</p><p>Seu pedido foi cancelado com <b>sucesso </b>!</p><p><br></p><p>Atenciosamente,&nbsp;</p><p>Jamelo</p>';
             $msg->dt_message = date('Y-m-d H:i:s');
             $msg->checked = 'N';
             $msg->store();

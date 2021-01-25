@@ -52,7 +52,8 @@ class PedidosList extends TPage
         $this->addFilterField('id', '=', 'id'); // filterField, operator, formField
         $this->addFilterField('system_user_id', '=', 'system_user_id');
         $criteria = new TCriteria();
-        $criteria->add(new TFilter('fase','!=', '4'));
+        $criteria->add(new TFilter('fase','!=', '4'), TExpression::OR_OPERATOR);
+        $criteria->add(new TFilter('fase','!=', '5'), TExpression::OR_OPERATOR);
         $this->setCriteria($criteria);
         //$this->addFilterField('fase', '=', 'fase'); // filterField, operator, formField
         
