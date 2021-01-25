@@ -65,7 +65,7 @@ class EnderecoForm extends TPage
         $bairro   = new TEntry('bairro');
         $numero   = new TEntry('numero');
         $complemento   = new TEntry('complemento');
-        $cidade   = new TDBCombo('cidade_id', 'jamelo', 'Cidade', 'id', 'nome');
+        $cidade   = new TDBCombo('localidade_id', 'jamelo', 'Localidade', 'id', 'nome');
         $cidade->enableSearch();
         $lat   = new THidden('lat');
         $lon   = new THidden('lon');
