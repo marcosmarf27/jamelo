@@ -18,6 +18,7 @@ use Adianti\Widget\Util\TXMLBreadCrumb;
 use Adianti\Widget\Container\TPanelGroup;
 use Adianti\Widget\Datagrid\TDataGridAction;
 use Adianti\Widget\Datagrid\TDataGridColumn;
+use Adianti\Widget\Form\TRadioGroup;
 use Adianti\Wrapper\BootstrapDatagridWrapper;
 
 class Resumo extends TPage
@@ -176,6 +177,10 @@ class Resumo extends TPage
         $troco = new TEntry('troco');
         $jamelo = new TEntry('jamelo');
         $jamelo->setTip('Seus Jamelos acumulados');
+        $entrega =  new TRadioGroup('entrega');
+        $entrega->addItems(array('1' => 'Receber em casa', '2' => 'Eu vou buscar'));
+        $entrega->setUseButton();
+        $entrega->setLayout('horizontal');
         
         $filtro = new TCriteria;
         $filtro->add(new TFilter('id', 'IN', array(1, 2, 3)));
@@ -195,6 +200,9 @@ class Resumo extends TPage
         $form->addFields( [new TLabel('<i class="fas fa-money-bill"></i>')], [$jamelo]);
         $form->addFields( [new TLabel('<i class="fas fa-user-edit"></i>')], [$obs]);
         $form->addFields( [new TLabel('<i class="fas fa-exchange-alt"></i>')], [$troco]);
+        $form->addFields( [new TLabel('<i class="fas fa-motorcycle"></i>')], [$entrega]);
+
+       
       
         
         $form->addAction('Confirmar Pedido', new TAction([__CLASS__, 'gerarPedido']), 'fa:save green');
@@ -220,6 +228,15 @@ class Resumo extends TPage
         $pedido->obs = $opcoes->obs;
         $pedido->status = 1 ;
         $pedido->fase = 1 ;
+
+        if($opcoes->entrega == '1'){
+            $pedido->entrega = 2.0;
+            $pedido->store();
+        }else{
+            $pedido->entrega = 0;
+            $pedido->store();
+        }
+      
       
         $pedido->store();
         //gera os itens
@@ -260,8 +277,7 @@ class Resumo extends TPage
         $pedido->pontovalor = 0;
         $pedido->valorcomdesc = $total;
         $pedido->troco = abs($opcoes->troco -  $pedido->valorcomdesc);
-        print_r($opcoes->troco);
-        print_r($pedido->valorcomdesc);
+    
         $pedido->store();
        /*  if ($opcoes->pagamento != '4'){
 

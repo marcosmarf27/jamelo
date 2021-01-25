@@ -39,6 +39,7 @@ class Pedido extends TRecord
         parent::addAttribute('data_entrega');
         parent::addAttribute('data_pag');
         parent::addAttribute('valor_pag');
+        parent::addAttribute('entrega');
         parent::addAttribute('total');//valor do pedido
         parent::addAttribute('pontovalor');// valor descontado
         parent::addAttribute('valorcomdesc');// valor do pedido com desconto
