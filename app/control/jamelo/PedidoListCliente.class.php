@@ -249,6 +249,7 @@ class PedidoListCliente extends TPage
       /*   $this->datagrid->addAction($action_edit, 'Edit',   'far:edit blue fa-fw');
         $this->datagrid->addAction($action_delete, 'Delete', 'far:trash-alt red fa-fw'); */
         $this->datagrid->addAction($action_cancelar, 'Cancelar', 'far:trash-alt red fa-fw');
+        $action_cancelar->setUseButton(TRUE);
         $action_edit->setLabel('Editar pedido');
         $action_edit->setImage('far:edit blue fa-fw');
 
