@@ -104,17 +104,13 @@ class PedidosList extends TPage
         
         // creates the datagrid columns
         $column_id       = new TDataGridColumn('id', 'Nº', 'center', '5%');
-        $column_date     = new TDataGridColumn('data_pedido', 'Horário', 'center', '5%');
-        $column_customer = new TDataGridColumn('cliente->name', 'Cliente', 'left', '10%');
+        $column_date     = new TDataGridColumn('data_pedido', 'Horário', 'center', '10%');
+        $column_customer = new TDataGridColumn('cliente->name', 'Cliente', 'left', '20%');
         $column_fase    = new TDataGridColumn('fase', 'Fase', 'right', '15%');
-       // $column_valorpedido = new TDataGridColumn('valorcomdesc', 'Valor', 'left', '5%');
-        $column_troco = new TDataGridColumn('troco', 'Troco', 'left', '5%');
-        $column_endereco = new TDataGridColumn('cliente->endereco->rua', 'Rua', 'left', '10%');
-        $column_localidade = new TDataGridColumn('cliente->endereco->localidade->nome', 'Local', 'left', '10%');
-        $column_numero = new TDataGridColumn('cliente->endereco->numero', 'Número', 'left', '5%');
-        $column_bairro = new TDataGridColumn('cliente->endereco->bairro', 'Bairro', 'left', '5%');
-        $column_obs = new TDataGridColumn('cliente->endereco->obs', 'Referência', 'left', '10%');
-        $column_obspedido = new TDataGridColumn('obs', 'Ajustes', 'left', '10%');
+        $column_valorpedido = new TDataGridColumn('valorcomdesc', 'Valor', 'left', '10%');
+        $column_troco = new TDataGridColumn('troco', 'Troco', 'left', '10%');
+      
+        $column_obspedido = new TDataGridColumn('obs', 'Ajustes', 'left', '30%');
        //$column_valorr = new TDataGridColumn('total', 'Valor', 'left', '15%');
        // $column_status    = new TDataGridColumn('status', 'Pago?', 'right', '15%');
       
@@ -145,10 +141,7 @@ class PedidosList extends TPage
        //$this->datagrid->addColumn($column_valorpedido);
         $this->datagrid->addColumn($column_troco);
         $this->datagrid->addColumn($column_localidade);
-        $this->datagrid->addColumn($column_endereco);
-        $this->datagrid->addColumn($column_numero);
-        $this->datagrid->addColumn($column_bairro);
-        $this->datagrid->addColumn($column_obs);
+
         $this->datagrid->addColumn($column_obspedido);
         //$this->datagrid->addColumn($column_total);
        
