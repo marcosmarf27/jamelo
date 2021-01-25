@@ -109,13 +109,14 @@ class PedidosList extends TPage
         $column_fase    = new TDataGridColumn('fase', 'Fase', 'right', '15%');
         $column_valorpedido = new TDataGridColumn('valorcomdesc', 'Valor', 'left', '10%');
         $column_troco = new TDataGridColumn('troco', 'Troco', 'left', '10%');
-        $column_desconto = new TDataGridColumn('valorponto', 'Valor', 'left', '10%');
+        $column_desconto = new TDataGridColumn('pontovalor', 'Desconto', 'left', '10%');
       
         $column_obspedido = new TDataGridColumn('obs', 'Ajustes', 'left', '30%');
-       $column_valorr = new TDataGridColumn('total', 'Valor', 'left', '15%');
+       $column_valorr = new TDataGridColumn('total', 'Valor original', 'left', '15%');
        // $column_status    = new TDataGridColumn('status', 'Pago?', 'right', '15%');
       
         $column_customer->setDataProperty('style','font-weight: bold');
+        $column_obspedido->setDataProperty('style','font-weight: 16px bold');
       
         
         // define format function
@@ -226,6 +227,9 @@ class PedidosList extends TPage
             return $date->format('H:i:s');
         });
         $column_troco->setTransformer($format_value);
+        $column_desconto->setTransformer($format_value);
+        $column_valorpedido->setTransformer($format_value);
+        $column_valorr->setTransformer($format_value);
 
         //$action_view   = new TDataGridAction(['SaleSidePanelView', 'onView'],   ['key' => '{id}', 'register_state' => 'false'] );
         //$action_edit   = new TDataGridAction(['PedidoForm', 'onEdit'],   ['key' => '{id}'] );
