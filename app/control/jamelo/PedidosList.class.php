@@ -112,7 +112,7 @@ class PedidosList extends TPage
         $column_desconto = new TDataGridColumn('pontovalor', 'Desconto', 'left', '10%');
       
         $column_obspedido = new TDataGridColumn('obs', 'Ajustes', 'left', '40%');
-       $column_valorr = new TDataGridColumn('total', 'Valor original', 'left', '10%');
+       $column_valorr = new TDataGridColumn('total', 'Original', 'left', '10%');
        // $column_status    = new TDataGridColumn('status', 'Pago?', 'right', '15%');
       
         $column_customer->setDataProperty('style','font-weight: bold');
@@ -304,8 +304,8 @@ class PedidosList extends TPage
         $container->add($panel = TPanelGroup::pack('', $this->datagrid, $this->pageNavigation));
         $panel->getBody()->style = 'overflow-x:auto;';
        // $panel->addHeaderActionLink( 'PDF', new TAction([$this, 'exportAsPDF'], ['register_state' => 'false']), 'far:file-pdf red' );
-        $panel->addHeaderActionLink( 'Ver Cozinha', new TAction(['CozinhaList', 'onReload'], ['register_state' => 'false']), 'fa:table blue' );
-        parent::add($container);
+       // $panel->addHeaderActionLink( 'Ver Cozinha', new TAction(['CozinhaList', 'onReload'], ['register_state' => 'false']), 'fa:table blue' );
+        parent::add($this->datagrid);
     }
 
     public function entregarPedido($param){
