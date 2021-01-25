@@ -112,9 +112,12 @@ class PedidosList extends TPage
         $column_customer = new TDataGridColumn('cliente->name', 'Cliente', 'left', '10%');
         $column_telefone = new TDataGridColumn('cliente->telefone', 'whatsapp', 'left', '10%');
         $column_fase    = new TDataGridColumn('fase', 'Fase', 'right', '15%');
+      //  $column_valorpedido = new TDataGridColumn('total', 'Valor', 'left', '10%');
         $column_valorpedido = new TDataGridColumn('valorcomdesc', 'Valor', 'left', '10%');
         $column_troco = new TDataGridColumn('troco', 'Troco', 'left', '10%');
         $column_desconto = new TDataGridColumn('pontovalor', 'Desconto', 'left', '10%');
+        $column_entrega = new TDataGridColumn('entrega', 'Tx . entrega', 'left', '10%');
+        $column_subtotal = new TDataGridColumn( '={valorcomdesc} + {entrega}', 'Total', 'left', '10%');
       
         $column_obspedido = new TDataGridColumn('obs', 'Ajustes', 'left', '30%');
        $column_valorr = new TDataGridColumn('total', 'Original', 'left', '10%');
@@ -147,11 +150,16 @@ class PedidosList extends TPage
         $this->datagrid->addColumn($column_fase);
       
        // $this->datagrid->addColumn($column_valorr);
-        //$this->datagrid->addColumn($column_desconto);
+
        $this->datagrid->addColumn($column_valorpedido);
+       $this->datagrid->addColumn($column_desconto);
+       $this->datagrid->addColumn($column_entrega);
     
-        $this->datagrid->addColumn($column_troco);
+        $this->datagrid->addColumn($column_subtotal);
         //$this->datagrid->addColumn($column_localidade);
+
+        
+        $this->datagrid->addColumn($column_troco);
 
         $this->datagrid->addColumn($column_obspedido);
     
