@@ -211,7 +211,7 @@ class Resumo extends TPage
         $form->addFields( [new TLabel('<i class="fas fa-credit-card"></i>')], [$formapagamento]);
         $form->addFields( [new TLabel('<i class="fas fa-money-bill"></i>')], [$jamelo]);
         $form->addFields( [new TLabel('<i class="fas fa-user-edit"></i>')], [$obs]);
-        $form->addFields( [new TLabel('<i class="fas fa-exchange-alt"></i>')], [$troco]);
+        $form->addFields( [new TLabel('Troco para <i class="fas fa-exchange-alt"></i>')], [$troco]);
         $form->addFields( [new TLabel('<i class="fas fa-motorcycle"></i>')], [$entrega]);
         $form->addFields( [new TLabel('Taxa R$')], [$taxa]);
 
