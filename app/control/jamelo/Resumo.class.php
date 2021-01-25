@@ -174,7 +174,9 @@ class Resumo extends TPage
     {
         $form = new BootstrapFormBuilder('input_form_resumo');
         
-        $troco = new TEntry('troco');
+       
+        $troco = new TCombo('troco');
+        $troco->addItems(array('20' => 'R$ 20', '50' => 'R$ 50', '100' => 'R$ 100' ));
         $jamelo = new TEntry('jamelo');
         $taxa = new TEntry('taxa');
         $taxa->setNumericMask(2, '.', ',', true);
