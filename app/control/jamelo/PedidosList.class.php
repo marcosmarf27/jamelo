@@ -515,7 +515,7 @@ class PedidosList extends TPage
         $this->detail_list->createModel();
 
         $items = PedidoItem::where('pedido_id', '=', $param['key'])->load();
-        $this->endereco->addItems($items);
+        $this->detail_list->addItems($items);
 
 
        
