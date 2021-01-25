@@ -208,6 +208,19 @@ class PedidosList extends TPage
                             $div->add($result);
                             return "{$icon} $div";
                             break;
+
+                            case 5:
+                                $icon  = "<i class='fas fa-window-close' aria-hidden='true'></i>";
+    
+                                
+                                
+                                $result =  Fase::findInTransaction('jamelo', $value)->nome;
+                                $div = new TElement('span');
+                                $div->class="label label-danger";
+                                $div->style="text-shadow:none; font-size:10px";
+                                $div->add($result);
+                                return "{$icon} $div";
+                                break;
                     
                     
 
