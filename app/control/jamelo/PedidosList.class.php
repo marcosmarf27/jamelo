@@ -109,9 +109,10 @@ class PedidosList extends TPage
         $column_fase    = new TDataGridColumn('fase', 'Fase', 'right', '15%');
         $column_valorpedido = new TDataGridColumn('valorcomdesc', 'Valor', 'left', '10%');
         $column_troco = new TDataGridColumn('troco', 'Troco', 'left', '10%');
+        $column_desconto = new TDataGridColumn('valorponto', 'Valor', 'left', '10%');
       
         $column_obspedido = new TDataGridColumn('obs', 'Ajustes', 'left', '30%');
-       //$column_valorr = new TDataGridColumn('total', 'Valor', 'left', '15%');
+       $column_valorr = new TDataGridColumn('total', 'Valor', 'left', '15%');
        // $column_status    = new TDataGridColumn('status', 'Pago?', 'right', '15%');
       
         $column_customer->setDataProperty('style','font-weight: bold');
@@ -138,12 +139,14 @@ class PedidosList extends TPage
       
         $this->datagrid->addColumn($column_fase);
         $this->datagrid->addColumn($column_date);
-       //$this->datagrid->addColumn($column_valorpedido);
+        $this->datagrid->addColumn($column_valorr);
+       $this->datagrid->addColumn($column_valorpedido);
+       $this->datagrid->addColumn($column_desconto);
         $this->datagrid->addColumn($column_troco);
         //$this->datagrid->addColumn($column_localidade);
 
         $this->datagrid->addColumn($column_obspedido);
-        //$this->datagrid->addColumn($column_total);
+    
        
       
 
@@ -239,7 +242,7 @@ class PedidosList extends TPage
         //$action_endereco   = new TDataGridAction(['EnderecoFormWindow', 'loadPage'],   ['system_user_id' => '{system_user_id}'] );
         //$action_delete = new TDataGridAction([$this, 'onDelete'],   ['key' => '{id}'] );
         //$this->datagrid->addAction($action_cozinha, 'Ver itens na cozinha...', 'fas:list fa-fw');
-        $this->datagrid->addAction($action_detailes, 'View', 'fa:search #000000');
+        $this->datagrid->addAction($action_detailes, 'Ver Detalhes', 'fa:search #000000');
         $this->datagrid->addAction($action_confirm, 'Confirmar pedido e enviar para cozinha', 'fas:check green fa-fw');
         $this->datagrid->addAction($action_entregar, 'Pedido pronto, enviar para entrega', 'fas:motorcycle fa-fw');
         $this->datagrid->addAction($action_concluir, 'Confirmar entrega e concluir pedido', 'fas:cash-register black  fa-fw');
@@ -520,11 +523,13 @@ class PedidosList extends TPage
         $numero         = new TDataGridColumn('numero',  'Nº',    'right');
         $bairro        = new TDataGridColumn('bairro',  'Bairro',    'center');
         $obs      = new TDataGridColumn('obs',  'Ponto de Ref.',    'right');
+        $localidade      = new TDataGridColumn('localidade->nome',  'Local',    'right');
         //$total         = new TDataGridColumn('total',  'Total',    'right');
         
         $this->endereco->addColumn( $rua );
         $this->endereco->addColumn( $numero );
         $this->endereco->addColumn( $bairro );
+        $this->endereco->addColumn( $localidade );
        // $this->detail_list->addColumn( $discount );
         $this->endereco->addColumn( $obs );
 
