@@ -103,6 +103,7 @@ class PedidosList extends TPage
         // creates a DataGrid
         $this->datagrid = new BootstrapDatagridWrapper(new TDataGrid);
         $this->datagrid->width = '100%';
+        $this->datagrid->disableDefaultClick();
        // $this->datagrid->datatable = 'true';
         
         // creates the datagrid columns
