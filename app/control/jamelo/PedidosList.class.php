@@ -549,7 +549,7 @@ class PedidosList extends TPage
         });
 
         $product->setTransformer( function($value, $object, $row) {
-            return "<span id = 'cozinhaitem'  style='color:white; font-size: 25px; background: {$object->item->cor}'>$value</span>";
+            return "<span id = 'cozinhaitem'  style='color:white; font-size: 45px; background: {$object->item->cor}'>$value</span>";
         });
 
 
