@@ -189,6 +189,9 @@ class ResumoLogado extends TPage
         
         $troco = new TEntry('troco');
         $jamelo = new TEntry('jamelo');
+        $taxa = new TEntry('taxa');
+        $taxa->setNumericMask(2, '.', ',', true);
+        $taxa->setValue(2);
         $jamelo->setTip('Seus Jamelos acumulados');
         $entrega =  new TRadioGroup('entrega');
         $entrega->addItems(array('1' => 'Receber em casa', '2' => 'Eu vou buscar'));
@@ -211,6 +214,12 @@ class ResumoLogado extends TPage
 
         $formapagamento->setChangeAction(new TAction(array(__CLASS__, 'onChangeType')));
         self::onChangeType( ['pagamento' => '1'] );
+
+        $entrega->setChangeAction(new TAction(array(__CLASS__, 'onChangeType2')));
+        self::onChangeType( ['entrega' => '1'] );
+       $entrega->setValue(1);
+
+
       
         
       
@@ -220,6 +229,7 @@ class ResumoLogado extends TPage
         $form->addFields( [new TLabel('<i class="fas fa-user-edit"></i>')], [$obs]);
         $form->addFields( [new TLabel('<i class="fas fa-exchange-alt"></i>')], [$troco]);
         $form->addFields( [new TLabel('<i class="fas fa-motorcycle"></i>')], [$entrega]);
+        $form->addFields( [new TLabel('Taxa R$')], [$taxa]);
 
         $jamelo->setEditable(false);
         $info->setEditable(false);
@@ -422,5 +432,23 @@ class ResumoLogado extends TPage
 
 
         TTransaction::close();
+    }
+
+    public static function onChangeType2($param)
+    {
+        if ($param['entrega'] == '1')
+        {
+           
+            TQuickForm::showField('input_form_resumo', 'taxa');
+           
+          
+        }
+        else
+        {
+           
+            TQuickForm::hideField('input_form_resumo', 'taxa');
+           
+            
+        }
     }
 }
