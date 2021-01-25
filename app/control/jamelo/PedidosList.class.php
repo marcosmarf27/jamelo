@@ -549,7 +549,7 @@ class PedidosList extends TPage
         $row = new TTableRow;
         $row->style = "background-color: #E0DEF8";
         $row->addCell('');
-        $cell = $row->addCell($this->detail_list);
+        $cell = $row->addCell($panel);
         $cell->colspan =14;
         $cell->style='padding:10px;';
         
