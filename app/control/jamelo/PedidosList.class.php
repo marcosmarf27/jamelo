@@ -121,7 +121,7 @@ class PedidosList extends TPage
       
         $column_obspedido = new TDataGridColumn('obs', 'Ajustes', 'left', '30%');
        $column_valorr = new TDataGridColumn('total', 'Original', 'left', '10%');
-       // $column_status    = new TDataGridColumn('status', 'Pago?', 'right', '15%');
+        $column_status    = new TDataGridColumn('pagamento', 'Meio', 'right', '15%');
       
         $column_customer->setDataProperty('style','font-weight: bold');
         $column_obspedido->setDataProperty('style','font-weight: bold');
@@ -160,6 +160,7 @@ class PedidosList extends TPage
 
         
         $this->datagrid->addColumn($column_troco);
+        $this->datagrid->addColumn($column_status);
 
         $this->datagrid->addColumn($column_obspedido);
     
@@ -174,6 +175,8 @@ class PedidosList extends TPage
             $div->add($result);
             return $div;
         }); */
+
+
 
         $column_fase->setTransformer(function($value) {
             
@@ -231,6 +234,78 @@ class PedidosList extends TPage
                                 $result =  Fase::findInTransaction('jamelo', $value)->nome;
                                 $div = new TElement('span');
                                 $div->class="label label-danger";
+                                $div->style="text-shadow:none; font-size:10px";
+                                $div->add($result);
+                                return "{$icon} $div";
+                                break;
+                    
+                    
+
+
+                }
+             
+             });
+
+             $column_status->setTransformer(function($value) {
+            
+               
+                
+                switch($value)
+                {
+
+                    case 1:
+                        $icon  = "<i class='fas fa-money-bill-wave' aria-hidden='true'></i>";
+                      
+                        $result =  Pagamento::findInTransaction('jamelo', $value)->nome;
+                        $div = new TElement('span');
+                       
+                        $div->class="label label-info";
+                        $div->style="text-shadow:none; font-size:12px";
+                        $div->add($result);
+                        return "{$icon} $div";
+                        break;
+                    case 2:
+                        $icon  = "<i class='fas fa-credit-card' aria-hidden='true'></i>";
+                      
+                        $result =  Pagamento::findInTransaction('jamelo', $value)->nome;
+                        $div = new TElement('span');
+                        $div->class="label label-info";
+                        $div->style="text-shadow:none; font-size:12px";
+                        $div->add($result);
+                        return "{$icon} $div";
+                        break;
+                    case 3:
+                        $icon  = "<i class='fas fa-tablet-alt' aria-hidden='true'></i>";
+
+                     
+                       
+                        $result =  Pagamento::findInTransaction('jamelo', $value)->nome;
+                        $div = new TElement('span');
+                        $div->class="label label-info";
+                        $div->style="text-shadow:none; font-size:12px";
+                        $div->add($result);
+                        return "{$icon} $div";
+                        break;
+                        case 4:
+                            $icon  = "<i class='fas fa-check-circle' aria-hidden='true'></i>";
+                            
+                            
+                            $result =  Pagamento::findInTransaction('jamelo', $value)->nome;
+                            $div = new TElement('span');
+                            $div->class="label label-info";
+                            $div->style="text-shadow:none; font-size:10px";
+                            $div->add($result);
+                            return "{$icon} $div";
+                            break;
+
+                            case 5:
+                                $icon  = "<i class='fas fa-window-close' aria-hidden='true'></i>";
+    
+                                
+                                
+                                $result =  Pagamento::findInTransaction('jamelo', $value)->nome;
+                                $div = new TElement('span');
+                                $div->class="label label-info";
                                 $div->style="text-shadow:none; font-size:10px";
                                 $div->add($result);
                                 return "{$icon} $div";
