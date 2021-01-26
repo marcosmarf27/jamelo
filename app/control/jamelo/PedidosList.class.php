@@ -122,12 +122,13 @@ class PedidosList extends TPage
         $column_troco = new TDataGridColumn( '={troco} - {entrega} + {pontovalor}', 'Troco', 'left', '10%');
         $column_subtotal = new TDataGridColumn( '={valorcomdesc} + {entrega}', 'Total', 'left', '10%');
       
-        $column_obspedido = new TDataGridColumn('obs', 'Ajustes', 'left', '30%');
+        $column_obspedido = new TDataGridColumn('obs', 'Ajustes', 'left', '15%');
      
         $column_status    = new TDataGridColumn('pagamento', 'Meio', 'right', '15%');
       
         $column_customer->setDataProperty('style','font-weight: bold');
-        $column_obspedido->setDataProperty('style','font-weight: bold');
+       // $column_obspedido->setDataProperty('style','font-weight: bold');
+        $column_subtotal->setDataProperty('style','font-weight: bold');
       
         
         // define format function
