@@ -369,7 +369,16 @@ class Resumo extends TPage
         // Send a request
         $result = file_get_contents($url, false, $options); */
 
-      
+        $msg = new SystemMessage();
+        $msg->system_user_id =  $pedido->system_user_id; //admnistrador que envia mensagem
+        $msg->system_user_to_id = 1;
+       
+        $msg->subject = "Novo pedido recebido";
+        $msg->message = '';
+        $msg->dt_message = date('Y-m-d H:i:s');
+        $msg->checked = 'N';
+        $msg->store();
+
 
 
 
@@ -387,6 +396,9 @@ class Resumo extends TPage
 
     public static function onChangeType($param)
     {
+
+       if(isset($param['pagamento'])){
+
         if ($param['pagamento'] == '4')
         {
            
@@ -401,6 +413,9 @@ class Resumo extends TPage
            
             
         }
+
+       }
+       
     }
 
     public static function onChangeType2($param)

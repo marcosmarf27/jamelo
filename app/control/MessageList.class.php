@@ -20,7 +20,12 @@ class MessageList extends TElement
             
             // load the messages to the logged user
             $system_messages = SystemMessage::where('checked', '=', 'N')->where('system_user_to_id', '=', TSession::getValue('userid'))->orderBy('id', 'desc')->load();
-            
+            if($system_messages){
+                if(TSession::getValue('userid') == 1){
+                    echo ' <audio id="audio" autoplay> <source src="app/resources/alert.wav" type="audio/mp3" /> </audio>';
+                }
+                
+            }
             if ($param['theme'] == 'theme3')
             {
                 $this->class = 'dropdown-menu';
@@ -45,6 +50,10 @@ class MessageList extends TElement
                 TTransaction::open('permission');
                 foreach ($system_messages as $system_message)
                 {
+                    //echo ' <audio id="audio" autoplay> <source src="app/resources/alert.wav" type="audio/mp3" /> </audio>';
+                  
+                    
+                       
                     $name    = SystemUser::find($system_message->system_user_id)->name;
                     $date    = $this->getShortPastTime($system_message->dt_message);
                     $subject = htmlspecialchars($system_message->subject, ENT_QUOTES | ENT_HTML5, 'UTF-8');

@@ -463,6 +463,11 @@ class PedidosList extends TPage
         $msg->checked = 'N';
         $msg->store();
 
+        SystemMessage::where('system_user_to_id', '=', '1')
+        ->where('system_user_id', '=', $pedido->system_user_id)
+        ->set('checked', 'Y')
+        ->update();
+
         $action = new TAction(array('PedidosList', 'onReload'));
         new TMessage('info', 'Pedido recebido com sucesso!', $action);
 

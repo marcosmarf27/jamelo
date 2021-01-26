@@ -47,6 +47,9 @@
             });
             
             update_messages_menu();
+
+            setInterval(function(){  update_messages_menu(); }, 10000);
+
             update_notifications_menu();
             
             // setInterval( update_messages_menu, 5000);
@@ -59,6 +62,7 @@
   </head>
   
   <body class="hold-transition skin-blue sidebar-mini">
+   
     <div class="wrapper">
 
       <header class="main-header">

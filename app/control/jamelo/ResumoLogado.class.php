@@ -405,7 +405,8 @@ class ResumoLogado extends TPage
     {
         TTransaction::open('jamelo');
         $usuariototalponto = new SystemUser(TSession::getValue('userid'));
-       
+      
+    
         if($usuariototalponto->pontos){
             $usuariototalpontoformatado = number_format($usuariototalponto->pontos, 2, ',', '.');
 
@@ -413,24 +414,33 @@ class ResumoLogado extends TPage
             $obj->jamelo = $usuariototalpontoformatado;
             TForm::sendData('input_form_resumo', $obj);
          
+        }else{
+            $obj = new stdClass;
+            $obj->jamelo = 0;
+            TForm::sendData('input_form_resumo', $obj);
+        }
+
+        if(isset($param['pagamento'])){
+
+            if ($param['pagamento'] == '4' or $param['pagamento'] == '5')
+            {
+               
+                TQuickForm::showField('input_form_resumo', 'jamelo');
+                TQuickForm::showField('input_form_resumo', 'info');
+               
+              
+            }
+            else
+            {
+               
+                TQuickForm::hideField('input_form_resumo', 'jamelo');
+                TQuickForm::hideField('input_form_resumo', 'info');
+               
+                
+            }
 
         }
-        if ($param['pagamento'] == '4' or $param['pagamento'] == '5')
-        {
-           
-            TQuickForm::showField('input_form_resumo', 'jamelo');
-            TQuickForm::showField('input_form_resumo', 'info');
-           
-          
-        }
-        else
-        {
-           
-            TQuickForm::hideField('input_form_resumo', 'jamelo');
-            TQuickForm::hideField('input_form_resumo', 'info');
-           
-            
-        }
+      
 
 
         TTransaction::close();
