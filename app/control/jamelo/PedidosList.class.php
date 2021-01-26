@@ -344,6 +344,7 @@ class PedidosList extends TPage
             return $date->format('H:i:s');
         }); */
         $column_troco->setTransformer($format_value);
+        $column_valordescontado->setTransformer($format_value);
         $column_entrega->setTransformer($format_value);
         $column_subtotal->setTransformer($format_value);
         $column_desconto->setTransformer($format_value);
