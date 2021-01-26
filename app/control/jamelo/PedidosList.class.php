@@ -111,7 +111,7 @@ class PedidosList extends TPage
         //$column_date     = new TDataGridColumn('data_pedido', 'Horário', 'center', '10%');
         $column_customer = new TDataGridColumn('cliente->name', 'Cliente', 'left', '10%');
         $column_telefone = new TDataGridColumn('cliente->telefone', 'whatsapp', 'left', '10%');
-        $column_fase    = new TDataGridColumn('fase', 'Fase', 'right', '15%');
+        $column_fase    = new TDataGridColumn('fase', 'Fase', 'right', '20%');
       //  $column_valorpedido = new TDataGridColumn('total', 'Valor', 'left', '10%');
         $column_valorpedido = new TDataGridColumn('valorcomdesc', 'Valor', 'left', '10%');
        
@@ -122,7 +122,7 @@ class PedidosList extends TPage
         $column_troco = new TDataGridColumn( '={troco} - {entrega} + {pontovalor}', 'Troco', 'left', '10%');
         $column_subtotal = new TDataGridColumn( '={valorcomdesc} + {entrega}', 'Total', 'left', '10%');
       
-        $column_obspedido = new TDataGridColumn('obs', 'Ajustes', 'left', '15%');
+        $column_obspedido = new TDataGridColumn('obs', 'Ajustes', 'left', '20%');
      
         $column_status    = new TDataGridColumn('pagamento', 'Meio', 'right', '15%');
       
