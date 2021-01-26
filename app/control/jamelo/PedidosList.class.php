@@ -267,7 +267,7 @@ class PedidosList extends TPage
                         $div->class="label label-info";
                         $div->style="text-shadow:none; font-size:12px";
                         $div->add($result);
-                        return "{$icon} $div";
+                        return "{$icon}";
                         break;
                     case 2:
                         $icon  = "<i class='fas fa-credit-card' aria-hidden='true'></i>";
@@ -277,7 +277,7 @@ class PedidosList extends TPage
                         $div->class="label label-info";
                         $div->style="text-shadow:none; font-size:12px";
                         $div->add($result);
-                        return "{$icon} $div";
+                        return "{$icon}";
                         break;
                     case 3:
                         $icon  = "<i class='fas fa-tablet-alt' aria-hidden='true'></i>";
@@ -289,7 +289,7 @@ class PedidosList extends TPage
                         $div->class="label label-info";
                         $div->style="text-shadow:none; font-size:12px";
                         $div->add($result);
-                        return "{$icon} $div";
+                        return "{$icon}";
                         break;
                         case 4:
                             $icon  = "<i class='fas fa-check-circle' aria-hidden='true'></i>";
@@ -300,7 +300,7 @@ class PedidosList extends TPage
                             $div->class="label label-info";
                             $div->style="text-shadow:none; font-size:10px";
                             $div->add($result);
-                            return "{$icon} $div";
+                            return "{$icon}";
                             break;
 
                             case 5:
@@ -313,7 +313,7 @@ class PedidosList extends TPage
                                 $div->class="label label-info";
                                 $div->style="text-shadow:none; font-size:10px";
                                 $div->add($result);
-                                return "{$icon} $div";
+                                return "{$icon}";
                                 break;
                     
                     
