@@ -293,6 +293,7 @@ class PedidosList extends TPage
                         break;
                         case 4:
                             $icon  = "<i class='fas fa-check-circle' aria-hidden='true'></i>";
+                            $icon2  = "<i class='fas fa-money-bill-wave' aria-hidden='true'></i>";
                             
                             
                             $result =  Pagamento::findInTransaction('jamelo', $value)->nome;
@@ -300,11 +301,12 @@ class PedidosList extends TPage
                             $div->class="label label-info";
                             $div->style="text-shadow:none; font-size:10px";
                             $div->add($result);
-                            return "{$icon}";
+                            return "{$icon}+{$icon2}";
                             break;
 
                             case 5:
-                                $icon  = "<i class='fas fa-window-close' aria-hidden='true'></i>";
+                                $icon  = "<i class='fas fa-check-circle' aria-hidden='true'></i>";
+                                $icon2  = "<i class='fas fa-credit-card' aria-hidden='true'></i>";
     
                                 
                                 
@@ -313,7 +315,7 @@ class PedidosList extends TPage
                                 $div->class="label label-info";
                                 $div->style="text-shadow:none; font-size:10px";
                                 $div->add($result);
-                                return "{$icon}";
+                                return "{$icon}+{$icon2}";
                                 break;
                     
                     
