@@ -371,7 +371,15 @@ class ResumoLogado extends TPage
 
         }
 
-        
+        $msg = new SystemMessage();
+        $msg->system_user_id =  $pedido->system_user_id; //admnistrador que envia mensagem
+        $msg->system_user_to_id = 1;
+       
+        $msg->subject = "Novo pedido recebido";
+        $msg->message = '';
+        $msg->dt_message = date('Y-m-d H:i:s');
+        $msg->checked = 'N';
+        $msg->store();
         
         $this->onReload($param);
        
