@@ -376,7 +376,7 @@ class PedidosList extends TPage
         //$action_endereco   = new TDataGridAction(['EnderecoFormWindow', 'loadPage'],   ['system_user_id' => '{system_user_id}'] );
         //$action_delete = new TDataGridAction([$this, 'onDelete'],   ['key' => '{id}'] );
         //$this->datagrid->addAction($action_cozinha, 'Ver itens na cozinha...', 'fas:list fa-fw');
-        $this->datagrid->addAction($action_detailes, 'Ver Pedido', 'fas:fa-hamburger black');
+        $this->datagrid->addAction($action_detailes, 'Ver Pedido', 'fas:hamburger black');
         $this->datagrid->addAction($action_confirm, 'Confirmar pedido e enviar para cozinha', 'fas:check green fa-fw');
         $this->datagrid->addAction($action_entregar, 'Pedido pronto, enviar para entrega', 'fas:motorcycle fa-fw');
         $this->datagrid->addAction($action_concluir, 'Confirmar entrega e concluir pedido', 'fas:cash-register black  fa-fw');
