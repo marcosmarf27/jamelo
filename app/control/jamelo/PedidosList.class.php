@@ -117,8 +117,8 @@ class PedidosList extends TPage
        
         $column_valorr = new TDataGridColumn('total', 'Valor', 'left', '10%');
         $column_desconto = new TDataGridColumn('pontovalor', 'Desconto', 'left', '10%');
-        $column_valordescontado = new TDataGridColumn('valorcomdesc', 'Valor final', 'left', '10%');
-        $column_entrega = new TDataGridColumn('entrega', 'Tx . entrega', 'left', '10%');
+        $column_valordescontado = new TDataGridColumn('valorcomdesc', 'Substotal', 'left', '10%');
+        $column_entrega = new TDataGridColumn('entrega', 'Tx.entrega', 'left', '10%');
         $column_troco = new TDataGridColumn( '={troco} - {entrega} + {pontovalor}', 'Troco', 'left', '10%');
         $column_subtotal = new TDataGridColumn( '={valorcomdesc} + {entrega}', 'Total', 'left', '10%');
       
