@@ -177,7 +177,9 @@ class Resumo extends TPage
         
        // $troco = new TEntry('troco');
         $troco = new TCombo('troco');
-        $troco->addItems(array('20' => 'R$ 20', '50' => 'R$ 50', '100' => 'R$ 100' ));
+        $troco->addItems(array('20' => 'R$ 20', '30' => 'R$ 30', '40' => 'R$ 40', '50' => 'R$ 50', '60' => 'R$ 60', '70' => 'R$ 70', '80' => 'R$ 80', '90' => 'R$ 90', '100' => 'R$ 100' ));
+        $troco->setValue(50);
+       // $troco->addItems(array('20' => 'R$ 20', '50' => 'R$ 50', '100' => 'R$ 100' ));
         $jamelo = new TEntry('jamelo');
         $taxa = new TEntry('taxa');
         $taxa->setNumericMask(2, '.', ',', true);

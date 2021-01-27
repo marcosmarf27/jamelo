@@ -226,6 +226,15 @@ class PedidoListCliente extends TPage
        $column_desconto->setTransformer($format_value);
        $column_subtotal->setTransformer($format_value);
        $column_entrega->setTransformer($format_value);
+
+       $column_subtotal->setTransformer( function($value, $object, $row) {
+        $div = new TElement('span');
+        $div->class="label label-info";
+        $div->style="text-shadow:none; font-size:15px";
+        $div->add($value);
+        return $div;
+    });
+
         
         // creates the datagrid column actions
         $column_id->setAction(new TAction([$this, 'onReload']),   ['order' => 'id']);

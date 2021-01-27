@@ -189,7 +189,8 @@ class ResumoLogado extends TPage
         $form = new BootstrapFormBuilder('input_form_resumo');
         
         $troco = new TCombo('troco');
-        $troco->addItems(array('20' => 'R$ 20', '50' => 'R$ 50', '100' => 'R$ 100' ));
+        $troco->addItems(array('20' => 'R$ 20', '30' => 'R$ 30', '40' => 'R$ 40', '50' => 'R$ 50', '60' => 'R$ 60', '70' => 'R$ 70', '80' => 'R$ 80', '90' => 'R$ 90', '100' => 'R$ 100' ));
+        $troco->setValue(50);
         $jamelo = new TEntry('jamelo');
         $taxa = new TEntry('taxa');
         $taxa->setNumericMask(2, '.', ',', true);
@@ -310,7 +311,13 @@ class ResumoLogado extends TPage
         $pedido->total = $total; //valor pedido original
         $pedido->pontovalor = 0; //valor que foi descontado
         $pedido->valorcomdesc = $total; //valor do pedido com desconto
-        $pedido->troco = abs($opcoes->troco -  $pedido->valorcomdesc);
+        
+        if($opcoes->troco > 0){
+            $pedido->troco = abs($opcoes->troco -  $pedido->valorcomdesc);
+        }else{
+            $pedido->troco = 0;
+        }
+        //$pedido->troco = abs($opcoes->troco -  $pedido->valorcomdesc);
         $pedido->store();
         //se não usar jamelos o sistema vai registrar os pontos
       /*   if ($opcoes->pagamento != '4'){
